@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Page
+
+# Model Form Field configuration
+form: $/learnkit/lms/models/page/fields.yaml
+
+# Model Class name
+modelClass: LearnKit\LMS\Models\Page
+
+# Default redirect location
+defaultRedirect: learnkit/lms/pages
+
+# Create page
+create:
+    title: Create Page
+    redirect: learnkit/lms/pages/update/:id
+    redirectClose: learnkit/lms/pages
+
+# Update page
+update:
+    title: Edit Page
+    redirect: learnkit/lms/pages
+    redirectClose: learnkit/lms/pages
+
+# Preview page
+preview:
+    title: Preview Page

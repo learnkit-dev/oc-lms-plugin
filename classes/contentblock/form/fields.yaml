@@ -1,0 +1,21 @@
+fields:
+  fields:
+    label: Fields
+    span: full
+    type: repeater
+    form:
+      fields:
+        uuid:
+          label: Uuid
+          span: left
+          type: text
+        label:
+          label: Label
+          type: text
+          span: left
+        type:
+          label: Type
+          span: right
+          type: dropdown
+          options:
+            text: Text

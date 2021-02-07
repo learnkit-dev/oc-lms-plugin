@@ -1,0 +1,86 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: learnkit.lms::lang.fields.name
+        span: left
+        type: text
+    slug:
+        label: learnkit.lms::lang.fields.slug
+        span: right
+        type: text
+        preset:
+            field: name
+            mode: slug
+    description:
+        label: learnkit.lms::lang.fields.description
+        span: full
+        size: huge
+        type: richeditor
+tabs:
+    stretch: true
+    fields:
+        content_blocks:
+            label: learnkit.lms::lang.fields.content_blocks
+            span: full
+            type: repeater
+            tab: learnkit.lms::lang.tabs.content_blocks
+            dependsOn: content_block_type
+            form:
+                fields:
+                    content_block_type:
+                        label: learnkit.lms::lang.fields.type
+                        type: dropdown
+                        placeholder: Select type
+                        span: left
+                    hash:
+                        label: learnkit.lms::lang.fields.hash
+                        type: text
+                        span: right
+        properties[override_previous_page_text]:
+            label: learnkit.lms::lang.fields.override_previous_page_text
+            span: left
+            type: text
+            tab: learnkit.lms::lang.tabs.properties
+        properties[override_next_page_text]:
+            label: learnkit.lms::lang.fields.override_next_page_text
+            span: right
+            type: text
+            tab: learnkit.lms::lang.tabs.properties
+        properties[override_finish_page_text]:
+            label: learnkit.lms::lang.fields.override_finish_page_text
+            span: left
+            type: text
+            tab: learnkit.lms::lang.tabs.properties
+        code_before_save:
+            label: learnkit.lms::lang.fields.code_before_save
+            span: full
+            type: codeeditor
+            stretch: true
+            tab: learnkit.lms::lang.tabs.code_before_save
+        code_after_save:
+            label: learnkit.lms::lang.fields.code_after_save
+            span: full
+            type: codeeditor
+            stretch: true
+            tab: learnkit.lms::lang.tabs.code_after_save
+
+secondaryTabs:
+    fields:
+        image:
+            label: learnkit.lms::lang.fields.image
+            type: fileupload
+            mode: image
+            useCaption: false
+        course:
+            label: learnkit.lms::lang.fields.course
+            type: recordfinder
+            list: $/learnkit/lms/models/course/columns.yaml
+        is_active:
+            label: learnkit.lms::lang.fields.is_active
+            type: switch
+        is_public:
+            label: learnkit.lms::lang.fields.is_public
+            type: switch

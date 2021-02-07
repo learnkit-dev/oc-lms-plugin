@@ -1,0 +1,23 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    name:
+        label: learnkit.lms::lang.fields.name
+        searchable: true
+        sortable: true
+    slug:
+        label: learnkit.lms::lang.fields.slug
+        searchable: true
+        sortable: true
+    is_active:
+        label: learnkit.lms::lang.fields.is_active
+        sortable: true
+        searchable: false
+        type: switch
+    is_public:
+        label: learnkit.lms::lang.fields.is_public
+        sortable: true
+        searchable: false
+        type: switch

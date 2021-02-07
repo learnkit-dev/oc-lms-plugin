@@ -1,0 +1,21 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+  name:
+    label: learnkit.lms::lang.fields.name
+    span: left
+    type: text
+  slug:
+    label: learnkit.lms::lang.fields.slug
+    span: right
+    type: text
+    preset:
+      field: name
+      mode: slug
+  description:
+    label: learnkit.lms::lang.fields.description
+    span: full
+    size: huge
+    type: richeditor

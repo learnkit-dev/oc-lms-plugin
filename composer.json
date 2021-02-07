@@ -1,0 +1,12 @@
+{
+    "name": "learnkit/oc-lms-plugin",
+    "description": "LMS plugin from LearnKit for October CMS",
+    "type": "october-plugin",
+    "authors": [
+        {
+            "name": "Sebastiaan Kloos",
+            "email": "sebastiaan@codecycler.com"
+        }
+    ],
+    "require": {}
+}

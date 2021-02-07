@@ -1,0 +1,17 @@
+1.0.1: First version of LMS
+1.0.2:
+  - Added Courses
+  - create_courses_table.php
+  - create_courses_users_table.php
+1.0.3:
+  - Added pages and content blocks
+  - create_pages_table.php
+1.0.4:
+  - Added results table
+  - create_results_table.php
+1.0.5:
+  - Added properties to the pages table
+  - update_pages_table.php
+1.0.6:
+  - Added code section to the pages table
+  - update_pages_table1.php

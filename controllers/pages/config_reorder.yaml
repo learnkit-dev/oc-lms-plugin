@@ -1,0 +1,17 @@
+# ===================================
+#  Reorder Behavior Config
+# ===================================
+
+# Reorder Title
+title: Reorder Pages
+
+# Attribute name
+nameFrom: reorder_name
+
+# Model Class name
+modelClass: LearnKit\LMS\Models\Page
+
+# Toolbar widget configuration
+toolbar:
+  # Partial for toolbar buttons
+  buttons: reorder_toolbar

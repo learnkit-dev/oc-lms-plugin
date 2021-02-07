@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Course
+
+# Model Form Field configuration
+form: $/learnkit/lms/models/course/fields.yaml
+
+# Model Class name
+modelClass: LearnKit\LMS\Models\Course
+
+# Default redirect location
+defaultRedirect: learnkit/lms/courses
+
+# Create page
+create:
+    title: Create Course
+    redirect: learnkit/lms/courses/update/:id
+    redirectClose: learnkit/lms/courses
+
+# Update page
+update:
+    title: Edit Course
+    redirect: learnkit/lms/courses
+    redirectClose: learnkit/lms/courses
+
+# Preview page
+preview:
+    title: Preview Course

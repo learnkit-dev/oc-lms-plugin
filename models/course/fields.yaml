@@ -1,0 +1,42 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        label: learnkit.lms::lang.fields.name
+        span: left
+        type: text
+    slug:
+        label: learnkit.lms::lang.fields.slug
+        span: right
+        type: text
+        preset:
+            field: name
+            mode: slug
+    description:
+        label: learnkit.lms::lang.fields.description
+        span: full
+        size: huge
+        type: richeditor
+tabs:
+    fields:
+        pages:
+            label: learnkit.lms::lang.fields.pages
+            span: full
+            type: partial
+            path: field_pages
+            tab: learnkit.lms::lang.tabs.pages
+secondaryTabs:
+    fields:
+        image:
+            label: learnkit.lms::lang.fields.image
+            type: fileupload
+            mode: image
+            useCaption: false
+        is_active:
+            label: learnkit.lms::lang.fields.is_active
+            type: switch
+        is_public:
+            label: learnkit.lms::lang.fields.is_public
+            type: switch

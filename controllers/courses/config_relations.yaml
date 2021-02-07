@@ -1,0 +1,11 @@
+pages:
+  label: learnkit.lms::lang.fields.pages
+  view:
+    toolbarButtons: create|delete|link|unlink
+    list: $/learnkit/lms/models/page/columns_sort.yaml
+    recordUrl: learnkit/lms/pages/update/:id
+    defaultSort:
+      column: sort_order
+      direction: asc
+  manage:
+    form: $/learnkit/lms/models/page/fields_no_relation.yaml
