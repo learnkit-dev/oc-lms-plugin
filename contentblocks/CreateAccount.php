@@ -28,6 +28,7 @@ class CreateAccount extends ContentBlockBase
         $user->tenants()->add($active);
 
         $user->is_guest = false;
+        $user->is_activated = true;
         $user->save();
 
         Auth::login($user);
