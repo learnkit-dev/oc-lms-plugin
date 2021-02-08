@@ -13,6 +13,8 @@
         this.$el.find('[data-option]').on('click', function () {
             let value = $(this).attr('data-option');
             self.$el.find('input[type="hidden"]').val(value);
+            self.$el.find('[data-option]').removeClass('bg-indigo-600 text-white');
+            $(this).addClass('bg-indigo-600 text-white');
         });
     }
 

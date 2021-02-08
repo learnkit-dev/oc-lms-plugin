@@ -19,3 +19,4 @@ fields:
           type: dropdown
           options:
             text: Text
+            textarea: Textarea

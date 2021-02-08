@@ -9,5 +9,9 @@
         {% if field.type == 'text' %}
             <input name="{{ field.uuid }}" value="{{ result.payload[field.uuid] }}" {{ page.is_readonly ? 'disabled' }} type="text" class="appearance-none block px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
         {% endif %}
+
+        {% if field.type == 'textarea' %}
+            <textarea name="{{ field.uuid }}" {{ page.is_readonly ? 'disabled' }} type="text" class="appearance-none block px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">{{ result.payload[field.uuid] }}</textarea>
+        {% endif %}
     </div>
 {% endfor %}
