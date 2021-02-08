@@ -1,4 +1,4 @@
-<?php namespace LearnKit\LMS\Classes\ContentBlock;
+<?php namespace LearnKit\LMS\ContentBlocks;
 
 use Ramsey\Uuid\Uuid;
 use LearnKit\LMS\Classes\Base\ContentBlockBase;

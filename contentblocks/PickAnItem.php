@@ -1,4 +1,4 @@
-<?php namespace LearnKit\LMS\Classes\ContentBlock;
+<?php namespace LearnKit\LMS\ContentBlocks;
 
 use LearnKit\LMS\Classes\Base\ContentBlockBase;
 
@@ -45,12 +45,14 @@ class PickAnItem extends ContentBlockBase
         ];
     }
 
-    public function render()
-    {
-        return '';
-    }
-
     public function saveResults()
     {
+        $payload = $this->preparePayload();
+        return $this->newResult(null, null, $payload);
+    }
+
+    public function preparePayload()
+    {
+        return input('picked');
     }
 }

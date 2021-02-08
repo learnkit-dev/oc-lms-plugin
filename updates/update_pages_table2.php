@@ -4,21 +4,19 @@ use Schema;
 use October\Rain\Database\Schema\Blueprint;
 use October\Rain\Database\Updates\Migration;
 
-class UpdatePagesTable1 extends Migration
+class UpdatePagesTable2 extends Migration
 {
     public function up()
     {
         Schema::table('learnkit_lms_pages', function (Blueprint $table) {
-            $table->text('code_before_save')->nullable();
-            $table->text('code_after_save')->nullable();
+            $table->tinyInteger('is_multiple')->nullable();
         });
     }
 
     public function down()
     {
         Schema::table('learnkit_lms_pages', function (Blueprint $table) {
-            $table->dropColumn('code_before_save');
-            $table->dropColumn('code_after_save');
+            $table->dropColumn('is_multiple');
         });
     }
 }

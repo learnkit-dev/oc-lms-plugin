@@ -51,7 +51,9 @@ class Page extends Model
     /**
      * @var array Attributes to be appended to the API representation of the model (ex. toArray())
      */
-    protected $appends = [];
+    protected $appends = [
+        'is_readonly',
+    ];
 
     /**
      * @var array Attributes to be removed from the API representation of the model (ex. toArray())
@@ -130,6 +132,17 @@ class Page extends Model
 
     public function renderContentBlock($block)
     {
+        //
+        if (Auth::getUser()) {
+            $results = Auth::getUser()
+                ->results()
+                ->where('content_block_hash', $block['hash'])
+                ->get();
+        } else {
+            $results = collect();
+        }
+
+        //
         $instance = ContentBlockHelper::instance()
             ->getTypeByCode($block['content_block_type']);
 
@@ -137,9 +150,12 @@ class Page extends Model
 
         $content = $instance->render();
 
+        //
         $twig = new Twig();
         return $twig->parse($content, [
             'config' => $block,
+            'page' => $this,
+            'results' => $results,
         ]);
     }
 
@@ -159,6 +175,25 @@ class Page extends Model
         }
 
         return $results;
+    }
+
+    public function getIsReadonlyAttribute()
+    {
+        // Check if is not multiple and result exists
+        $result = null;
+
+        if (Auth::getUser()) {
+            $result = Auth::getUser()
+                ->results()
+                ->where('page_id', $this->id)
+                ->first();
+        }
+
+        if (!$this->is_multiple && $result) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function getIsCompletedAttribute()

@@ -1,5 +1,6 @@
 <?php namespace LearnKit\LMS\Models;
 
+use Auth;
 use Model;
 
 /**
@@ -41,12 +42,16 @@ class Course extends Model
     /**
      * @var array Attributes to be cast to JSON
      */
-    protected $jsonable = [];
+    protected $jsonable = [
+        'properties',
+    ];
 
     /**
      * @var array Attributes to be appended to the API representation of the model (ex. toArray())
      */
-    protected $appends = [];
+    protected $appends = [
+        'is_visible',
+    ];
 
     /**
      * @var array Attributes to be removed from the API representation of the model (ex. toArray())
@@ -99,5 +104,14 @@ class Course extends Model
     {
         $page = $this->pages->first();
         return $page ? $page->slug : '';
+    }
+
+    public function getIsVisibleAttribute()
+    {
+        if (!$this->is_public && !Auth::getUser()) {
+            return false;
+        }
+
+        return true;
     }
 }

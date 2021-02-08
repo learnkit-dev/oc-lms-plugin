@@ -3,11 +3,11 @@
 use Event;
 use Backend;
 use System\Classes\PluginBase;
-use LearnKit\LMS\Classes\ContentBlock\H5P;
-use LearnKit\LMS\Classes\ContentBlock\Text;
-use LearnKit\LMS\Classes\ContentBlock\Form;
+use LearnKit\LMS\ContentBlocks\H5P;
+use LearnKit\LMS\ContentBlocks\Text;
+use LearnKit\LMS\ContentBlocks\Form;
 use LearnKit\LMS\Classes\Extend\RainLab\User;
-use LearnKit\LMS\Classes\ContentBlock\PickAnItem;
+use LearnKit\LMS\ContentBlocks\PickAnItem;
 use LearnKit\LMS\Classes\Helper\ContentBlockHelper;
 use LearnKit\LMS\Classes\Extend\LearnKit\ContentBlock;
 

@@ -1,7 +1,10 @@
 <?php namespace LearnKit\LMS\Components;
 
+use App;
+use Auth;
 use Cms\Classes\ComponentBase;
 use LearnKit\LMS\Models\Page as PageModel;
+use LearnKit\LMS\Classes\Helper\ContentBlockHelper;
 
 class Page extends ComponentBase
 {
@@ -44,6 +47,13 @@ class Page extends ComponentBase
     {
         $this->pageModel = PageModel::findBySlug($this->property('slug'));
 
+        $isPublic = (boolean) $this->pageModel->is_public;
+
+        if (!Auth::getUser() && !$isPublic) {
+            // Redirect to home
+            return App::abort(403, 'You must be logged in to see this content!');
+        }
+
         $this->nextPage = $this->pageModel->course
             ->pages()
             ->orderBy('sort_order', 'asc')
@@ -60,6 +70,14 @@ class Page extends ComponentBase
         $this->page['lmsPage'] = $this->pageModel;
         $this->page['previousPage'] = $this->previousPage;
         $this->page['nextPage'] = $this->nextPage;
+
+        // Add the ability for content blocks to add assets
+        foreach ($this->pageModel->content_blocks as $contentBlock) {
+            $type = ContentBlockHelper::instance()->getTypeByCode($contentBlock['content_block_type']);
+            $instance = new $type($contentBlock, $this->pageModel);
+
+            $this->addJs($instance->getPath() . '/script.js');
+        }
     }
 
     public function onRedirect()

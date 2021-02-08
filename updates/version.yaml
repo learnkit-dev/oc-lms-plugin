@@ -15,3 +15,9 @@
 1.0.6:
   - Added code section to the pages table
   - update_pages_table1.php
+1.0.7:
+  - Added multiple setting so pages can be marked to only allow one result
+  - update_pages_table2.php
+1.0.8:
+  - Added properties to the courses table
+  - update_courses_table.php

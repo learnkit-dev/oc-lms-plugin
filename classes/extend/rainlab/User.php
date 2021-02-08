@@ -1,6 +1,7 @@
 <?php namespace LearnKit\LMS\Classes\Extend\RainLab;
 
 use LearnKit\LMS\Models\Course;
+use LearnKit\LMS\Models\Result;
 use RainLab\User\Controllers\Users;
 use Kloos\Toolbox\Classes\Base\OctoberExtend;
 
@@ -25,6 +26,29 @@ class User extends OctoberExtend
                 'tab'   => 'learnkit.lms::lang.tabs.lms',
                 'span'  => 'left',
             ],
+            'results' => [
+                'label' => '',
+                'type'  => 'partial',
+                'path'  => '$/learnkit/lms/partials/user_results.htm',
+                'tab'   => 'learnkit.lms::lang.tabs.results',
+                'span'  => 'full',
+            ],
+        ];
+    }
+
+    public function addRelationConfig()
+    {
+        return [
+            'results' => [
+                'label' => 'result',
+                'manage'    => [
+                    'form' => '$/learnkit/lms/models/result/fields.yaml',
+                ],
+                'view'      => [
+                    'toolbarButtons' => 'delete',
+                    'list' => '$/learnkit/lms/models/result/columns.yaml',
+                ],
+            ],
         ];
     }
 
@@ -35,6 +59,13 @@ class User extends OctoberExtend
                 Course::class,
                 'table' => 'learnkit_lms_courses_users',
             ],
+        ];
+    }
+
+    public function hasMany()
+    {
+        return [
+            'results' => Result::class,
         ];
     }
 }

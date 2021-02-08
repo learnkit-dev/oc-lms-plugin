@@ -23,6 +23,8 @@ class ContentBlockBase
 
     protected $page;
 
+    protected $path;
+
     public function __construct($config = [], $page = null)
     {
         if (!$page) {
@@ -40,7 +42,14 @@ class ContentBlockBase
 
         $this->config = $config;
 
-        $this->addViewPath(plugins_path($this->plugin . '/classes/contentblock/' . $this->type));
+        $this->addViewPath(plugins_path($this->plugin . '/contentblocks/' . str_replace('_', '', $this->type)));
+
+        $this->path = '/plugins/' . $this->plugin . '/contentblocks/' . str_replace('_', '', $this->type);
+    }
+
+    public function getPath()
+    {
+        return $this->path;
     }
 
     public function beforeSave($config)
@@ -57,7 +66,7 @@ class ContentBlockBase
     public function formFields()
     {
         // Check if yaml file exists for the content block type
-        $fieldsPath = plugins_path($this->plugin . '/classes/contentblock/' . $this->type . '/fields.yaml');
+        $fieldsPath = plugins_path($this->plugin . '/contentblocks/' . $this->type . '/fields.yaml');
         if (file_exists($fieldsPath)) {
             return Yaml::parseFile($fieldsPath)['fields'];
         }

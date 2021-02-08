@@ -40,3 +40,7 @@ secondaryTabs:
         is_public:
             label: learnkit.lms::lang.fields.is_public
             type: switch
+        properties[display_sidebar]:
+            label: learnkit.lms::lang.fields.display_sidebar
+            type: switch
+            default: true

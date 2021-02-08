@@ -1,0 +1,9 @@
+<div class="grid grid-cols-1 gap-4 sm:grid-cols-3" data-content-type="pick-an-item">
+    <input type="hidden" name="picked" value="" />
+
+    {% for option in config.options %}
+        <a href="javascript:;" data-option="{{ option.value }}" class="relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm flex items-center space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500 focus:bg-indigo-600 focus:text-white">
+            <h1>{{ option.label }}</h1>
+        </a>
+    {% endfor %}
+</div>

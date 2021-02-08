@@ -24,6 +24,8 @@
         'override_finish_page_text'     => 'Override finish page button text',
         'code_before_save'              => 'Code before save',
         'code_after_save'               => 'Code after save',
+        'is_multiple'                   => 'Multiple results',
+        'display_sidebar'               => 'Display sidebar',
     ],
     'tabs' => [
         'lms'                   => 'LMS',

@@ -84,3 +84,7 @@ secondaryTabs:
         is_public:
             label: learnkit.lms::lang.fields.is_public
             type: switch
+        is_multiple:
+            label: learnkit.lms::lang.fields.is_multiple
+            type: switch
+            default: true
