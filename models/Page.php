@@ -215,7 +215,7 @@ class Page extends Model
                 return false;
             }
 
-            if ($results->count() > count($hashes)) {
+            if ($results->count() >= count($hashes)) {
                 return true;
             } else {
                 return false;
