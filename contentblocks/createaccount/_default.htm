@@ -1,0 +1,33 @@
+<div class="max-w-sm">
+    {% if config.ask_name %}
+    <div>
+        <label for="name" class="block text-sm font-medium text-gray-700">
+            Naam
+        </label>
+        <div class="mt-1">
+            <input id="name" {{ user ? 'disabled' }} value="{{ user.name }}" name="name" type="text" autocomplete="name" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="space-y-1 mt-5">
+        <label for="email" class="block text-sm font-medium text-gray-700">
+            E-mailadres
+        </label>
+        <div class="mt-1">
+            <input id="email" {{ user ? 'disabled' }} value="{{ user.email }}" name="email" type="text" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+    </div>
+
+    {% if not config.is_guest %}
+    <div class="space-y-1 mt-5">
+        <label for="password" class="block text-sm font-medium text-gray-700">
+            Wachtwoord
+        </label>
+        <div class="mt-1">
+            <input id="password" name="password" type="password" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+    </div>
+    {% endif %}
+
+</div>

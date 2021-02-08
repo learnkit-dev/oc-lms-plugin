@@ -156,6 +156,7 @@ class Page extends Model
             'config' => $block,
             'page' => $this,
             'results' => $results,
+            'user' => Auth::getUser(),
         ]);
     }
 

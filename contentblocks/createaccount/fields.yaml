@@ -1,0 +1,9 @@
+fields:
+  is_guest:
+    label: Is guest
+    span: left
+    type: checkbox
+  ask_name:
+    label: Ask name
+    span: left
+    type: checkbox

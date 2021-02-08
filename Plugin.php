@@ -8,6 +8,7 @@ use LearnKit\LMS\ContentBlocks\Text;
 use LearnKit\LMS\ContentBlocks\Form;
 use LearnKit\LMS\Classes\Extend\RainLab\User;
 use LearnKit\LMS\ContentBlocks\PickAnItem;
+use LearnKit\LMS\ContentBlocks\CreateAccount;
 use LearnKit\LMS\Classes\Helper\ContentBlockHelper;
 use LearnKit\LMS\Classes\Extend\LearnKit\ContentBlock;
 
@@ -130,6 +131,7 @@ class Plugin extends PluginBase
             H5P::class,
             PickAnItem::class,
             Form::class,
+            CreateAccount::class,
         ];
     }
 }

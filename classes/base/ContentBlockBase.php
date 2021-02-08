@@ -66,7 +66,7 @@ class ContentBlockBase
     public function formFields()
     {
         // Check if yaml file exists for the content block type
-        $fieldsPath = plugins_path($this->plugin . '/contentblocks/' . $this->type . '/fields.yaml');
+        $fieldsPath = plugins_path($this->plugin . '/contentblocks/' . str_replace('_', '', $this->type) . '/fields.yaml');
         if (file_exists($fieldsPath)) {
             return Yaml::parseFile($fieldsPath)['fields'];
         }
