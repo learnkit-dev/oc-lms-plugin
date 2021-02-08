@@ -48,6 +48,10 @@ class PickAnItem extends ContentBlockBase
     public function saveResults()
     {
         $payload = $this->preparePayload();
+
+        // Store subject results
+        $this->newSubjectResult($payload);
+
         return $this->newResult(null, null, $payload);
     }
 

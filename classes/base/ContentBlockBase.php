@@ -4,6 +4,7 @@ use Auth;
 use Yaml;
 use System\Traits\ViewMaker;
 use LearnKit\LMS\Models\Result;
+use LearnKit\LMS\Models\SubjectResult;
 
 class ContentBlockBase
 {
@@ -77,6 +78,28 @@ class ContentBlockBase
     public function saveResults()
     {
         return $this->newResult();
+    }
+
+    public function newSubjectResult($subject, $score = 1)
+    {
+        // First check if there is already a subject score for this content block / user
+        $subjectResult = Auth::getUser()
+            ->subject_results()
+            ->where('content_block_hash', $this->config['hash'])
+            ->first();
+
+        if (!$subjectResult) {
+            $subjectResult = SubjectResult::create([
+                'user_id' => Auth::getUser()->id,
+                'content_block_hash' => $this->config['hash'],
+                'page_id' => $this->page->id,
+                'course_id' => $this->page->course->id,
+                'score' => $score,
+                'subject' => $subject,
+            ]);
+        }
+
+        return $subjectResult;
     }
 
     public function newResult($score = null, $maxScore = null, $payload = [])

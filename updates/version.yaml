@@ -21,3 +21,7 @@
 1.0.8:
   - Added properties to the courses table
   - update_courses_table.php
+1.0.9:
+  - Added subjects to the courses table
+  - update_courses_table1.php
+  - create_subject_results_table.php

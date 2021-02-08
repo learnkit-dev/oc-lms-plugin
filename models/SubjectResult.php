@@ -1,23 +1,19 @@
 <?php namespace LearnKit\LMS\Models;
 
-use Auth;
 use Model;
+use RainLab\User\Models\User;
 
 /**
- * Course Model
+ * Result Model
  */
-class Course extends Model
+class SubjectResult extends Model
 {
     use \October\Rain\Database\Traits\Validation;
-
-    public $implement = [
-        '@Kloos.Saas.Behaviors.AttachedToTenant',
-    ];
 
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'learnkit_lms_courses';
+    public $table = 'learnkit_lms_subject_results';
 
     /**
      * @var array Guarded fields
@@ -43,16 +39,13 @@ class Course extends Model
      * @var array Attributes to be cast to JSON
      */
     protected $jsonable = [
-        'properties',
-        'subjects',
+        'payload',
     ];
 
     /**
      * @var array Attributes to be appended to the API representation of the model (ex. toArray())
      */
-    protected $appends = [
-        'is_visible',
-    ];
+    protected $appends = [];
 
     /**
      * @var array Attributes to be removed from the API representation of the model (ex. toArray())
@@ -71,48 +64,18 @@ class Course extends Model
      * @var array Relations
      */
     public $hasOne = [];
+    public $hasMany = [];
+    public $hasOneThrough = [];
+    public $hasManyThrough = [];
 
-    public $hasMany = [
-        'pages' => Page::class,
+    public $belongsTo = [
+        'user' => User::class,
     ];
 
-    public $hasOneThrough = [];
-    public $belongsTo = [];
     public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];
     public $morphMany = [];
-
-    public $attachOne = [
-        'image' => 'System\Models\File',
-    ];
-
+    public $attachOne = [];
     public $attachMany = [];
-
-    public static function findBySlug($slug)
-    {
-        return static::where('slug', $slug)
-            ->first();
-    }
-
-    public function daysOld()
-    {
-        $now = \Carbon\Carbon::now();
-        return $now->diffInDays($this->created_at);
-    }
-
-    public function getFirstPageSlugAttribute()
-    {
-        $page = $this->pages->first();
-        return $page ? $page->slug : '';
-    }
-
-    public function getIsVisibleAttribute()
-    {
-        if (!$this->is_public && !Auth::getUser()) {
-            return false;
-        }
-
-        return true;
-    }
 }
