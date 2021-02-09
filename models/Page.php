@@ -164,6 +164,7 @@ class Page extends Model
     {
         $results = collect([]);
 
+        // Loop through all the content blocks and create a new result record
         foreach ($this->content_blocks as $contentBlock) {
             $instance = ContentBlockHelper::instance()
                 ->getTypeByCode($contentBlock['content_block_type']);
@@ -171,6 +172,17 @@ class Page extends Model
             $instance = new $instance($contentBlock, $this);
 
             $result = $instance->saveResults();
+
+            $results->push($result);
+        }
+
+        // Mark whole page done when no content blocks exists
+        if (count($this->content_blocks) < 1) {
+            $result = Result::create([
+                'user_id' => Auth::getUser()->id,
+                'course_id' => $this->course->id,
+                'page_id' => $this->id,
+            ]);
 
             $results->push($result);
         }
@@ -212,6 +224,15 @@ class Page extends Model
                 ->get();
 
             if (count($hashes) === 0) {
+                // Check if page is done
+                $result = Result::where('user_id', $user->id)
+                    ->where('page_id', $this->id)
+                    ->first();
+
+                if ($result) {
+                    return true;
+                }
+
                 return false;
             }
 
