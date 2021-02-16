@@ -111,12 +111,18 @@ class Plugin extends PluginBase
                     'courses' => [
                         'label'         => 'learnkit.lms::lang.menu.courses',
                         'url'           => Backend::url('learnkit/lms/courses'),
-                        'icon'          => 'icon-star',
+                        'icon'          => 'icon-university',
                         'permissions'   => ['learnkit.lms.manage_courses'],
                     ],
                     'pages' => [
                         'label'         => 'learnkit.lms::lang.menu.pages',
                         'url'           => Backend::url('learnkit/lms/pages'),
+                        'icon'          => 'icon-window-maximize',
+                        'permissions'   => ['learnkit.lms::manage_pages'],
+                    ],
+                    'results' => [
+                        'label'         => 'learnkit.lms::lang.menu.results',
+                        'url'           => Backend::url('learnkit/lms/results'),
                         'icon'          => 'icon-star',
                         'permissions'   => ['learnkit.lms::manage_pages'],
                     ],
