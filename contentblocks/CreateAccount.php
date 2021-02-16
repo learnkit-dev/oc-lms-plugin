@@ -2,6 +2,7 @@
 
 use Auth;
 use Ramsey\Uuid\Uuid;
+use RainLab\User\Models\User;
 use Kloos\Saas\Classes\Tenant;
 use LearnKit\LMS\Classes\Base\ContentBlockBase;
 
@@ -25,7 +26,9 @@ class CreateAccount extends ContentBlockBase
 
         // For tenant
         $active = Tenant::instance()->active();
-        $user->tenants()->add($active);
+        if ($active) {
+            $user->tenants()->add($active);
+        }
 
         $user->is_guest = false;
         $user->is_activated = true;
@@ -68,6 +71,12 @@ class CreateAccount extends ContentBlockBase
 
     protected function createAccount($credentials)
     {
+        // Check if account already exists
+        $user = User::findByEmail($credentials['email']);
+        if ($user) {
+            return $user;
+        }
+
         return Auth::registerGuest($credentials);
     }
 }
