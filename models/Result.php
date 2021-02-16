@@ -1,6 +1,7 @@
 <?php namespace LearnKit\LMS\Models;
 
 use Model;
+use RainLab\User\Models\User;
 
 /**
  * Result Model
@@ -66,7 +67,13 @@ class Result extends Model
     public $hasMany = [];
     public $hasOneThrough = [];
     public $hasManyThrough = [];
-    public $belongsTo = [];
+
+    public $belongsTo = [
+        'user' => User::class,
+        'page' => Page::class,
+        'course' => Course::class,
+    ];
+
     public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];
