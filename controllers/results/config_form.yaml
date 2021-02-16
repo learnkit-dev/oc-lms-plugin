@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Result
+
+# Model Form Field configuration
+form: $/learnkit/lms/models/result/fields.yaml
+
+# Model Class name
+modelClass: LearnKit\LMS\Models\Result
+
+# Default redirect location
+defaultRedirect: learnkit/lms/results
+
+# Create page
+create:
+    title: Create Result
+    redirect: learnkit/lms/results/update/:id
+    redirectClose: learnkit/lms/results
+
+# Update page
+update:
+    title: Edit Result
+    redirect: learnkit/lms/results
+    redirectClose: learnkit/lms/results
+
+# Preview page
+preview:
+    title: Preview Result
