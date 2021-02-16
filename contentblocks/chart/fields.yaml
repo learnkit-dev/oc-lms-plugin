@@ -1,0 +1,21 @@
+fields:
+  data_type:
+    label: Chart type
+    span: left
+    type: dropdown
+    options:
+      subjectResults: Subject results
+  sections:
+    label: Sections
+    type: repeater
+    span: right
+    form:
+      fields:
+        section_key:
+          label: Section key
+          type: text
+          span: left
+        section_label:
+          label: Section label
+          type: text
+          span: right
