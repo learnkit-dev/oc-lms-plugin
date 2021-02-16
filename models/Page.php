@@ -90,6 +90,8 @@ class Page extends Model
 
     public $attachMany = [];
 
+    protected $activeContentBlockHash;
+
     public function getReorderNameAttribute()
     {
         return $this->course->name . ' - ' . $this->name;
@@ -170,9 +172,21 @@ class Page extends Model
             $instance = ContentBlockHelper::instance()
                 ->getTypeByCode($contentBlock['content_block_type']);
 
+            $this->activeContentBlockHash = $contentBlock['hash'];
+
             $instance = new $instance($contentBlock, $this);
 
-            $result = $instance->saveResults();
+            // Run PHP code before saving
+            if ($contentBlock['code_subject_result']) {
+                eval($contentBlock['code_subject_result']);
+            }
+
+            // Run PHP code before saving
+            if ($contentBlock['code_result']) {
+                eval($contentBlock['code_result']);
+            } else {
+                $result = $instance->saveResults();
+            }
 
             $results->push($result);
         }
@@ -208,6 +222,20 @@ class Page extends Model
         } else {
             return false;
         }
+    }
+
+    public function newSubjectResult($subject, $score = 1)
+    {
+        $subjectResult = SubjectResult::create([
+            'user_id' => Auth::getUser()->id,
+            'content_block_hash' => $this->activeContentBlockHash,
+            'page_id' => $this->id,
+            'course_id' => $this->course->id,
+            'score' => $score,
+            'subject' => $subject,
+        ]);
+
+        return $subjectResult;
     }
 
     public function getIsCompletedAttribute()

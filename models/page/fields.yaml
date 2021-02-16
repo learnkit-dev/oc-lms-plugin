@@ -39,6 +39,14 @@ tabs:
                         label: learnkit.lms::lang.fields.hash
                         type: text
                         span: right
+                    code_result:
+                        label: learnkit.lms::lang.fields.code_result
+                        type: codeeditor
+                        span: left
+                    code_subject_result:
+                        label: learnkit.lms::lang.fields.code_subject_result
+                        type: codeeditor
+                        span: right
         properties[override_previous_page_text]:
             label: learnkit.lms::lang.fields.override_previous_page_text
             span: left

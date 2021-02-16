@@ -30,6 +30,8 @@
         'user'                          => 'User',
         'score'                         => 'Score',
         'max_score'                     => 'Max score',
+        'code_result'                   => 'Code result',
+        'code_subject_result'           => 'Code subject result',
     ],
     'tabs' => [
         'lms'                   => 'LMS',
