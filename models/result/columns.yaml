@@ -3,6 +3,25 @@
 # ===================================
 
 columns:
-    id:
-        label: ID
-        searchable: true
+    created_at:
+        label: learnkit.lms::lang.fields.created_at
+        type: datetime
+        sortable: true
+    user_id:
+        label: learnkit.lms::lang.fields.user
+        relation: user
+        select: email
+    course:
+        label: learnkit.lms::lang.fields.course
+        relation: course
+        select: name
+    page:
+        label: learnkit.lms::lang.fields.page
+        relation: page
+        select: name
+    score:
+        label: learnkit.lms::lang.fields.score
+        type: number
+    max_score:
+        label: learnkit.lms::lang.fields.max_score
+        type: number
