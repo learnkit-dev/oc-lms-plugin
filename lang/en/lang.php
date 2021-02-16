@@ -26,6 +26,10 @@
         'code_after_save'               => 'Code after save',
         'is_multiple'                   => 'Multiple results',
         'display_sidebar'               => 'Display sidebar',
+        'created_at'                    => 'Created at',
+        'user'                          => 'User',
+        'score'                         => 'Score',
+        'max_score'                     => 'Max score',
     ],
     'tabs' => [
         'lms'                   => 'LMS',
@@ -41,6 +45,7 @@
         'courses'               => 'Courses',
         'pages'                 => 'Pages',
         'content_blocks'        => 'Content blocks',
+        'results'               => 'Results',
     ],
     'permissions' => [
         'manage_courses'        => 'Manage courses',
