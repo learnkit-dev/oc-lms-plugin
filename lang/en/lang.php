@@ -32,6 +32,10 @@
         'max_score'                     => 'Max score',
         'code_result'                   => 'Code result',
         'code_subject_result'           => 'Code subject result',
+        'custom_css'                    => 'Custom CSS',
+        'custom_js'                     => 'Custom JS',
+        'use_custom_css_js'             => 'Use custom CSS and JS',
+        'use_custom_code_result'        => 'Use custom code for results',
     ],
     'tabs' => [
         'lms'                   => 'LMS',

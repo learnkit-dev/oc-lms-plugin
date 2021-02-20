@@ -39,14 +39,46 @@ tabs:
                         label: learnkit.lms::lang.fields.hash
                         type: text
                         span: right
+                    use_custom_code_result:
+                        label: learnkit.lms::lang.fields.use_custom_code_result
+                        span: left
+                        type: checkbox
+                    use_custom_css_js:
+                        label: learnkit.lms::lang.fields.use_custom_css_js
+                        span: right
+                        type: checkbox
                     code_result:
                         label: learnkit.lms::lang.fields.code_result
                         type: codeeditor
                         span: left
+                        trigger:
+                            action: show
+                            field: use_custom_code_result
+                            condition: checked
                     code_subject_result:
                         label: learnkit.lms::lang.fields.code_subject_result
                         type: codeeditor
                         span: right
+                        trigger:
+                            action: show
+                            field: use_custom_code_result
+                            condition: checked
+                    custom_css:
+                        label: learnkit.lms::lang.fields.custom_css
+                        type: codeeditor
+                        span: left
+                        trigger:
+                            action: show
+                            field: use_custom_css_js
+                            condition: checked
+                    custom_js:
+                        label: learnkit.lms::lang.fields.custom_js
+                        type: codeeditor
+                        span: right
+                        trigger:
+                            action: show
+                            field: use_custom_css_js
+                            condition: checked
         properties[override_previous_page_text]:
             label: learnkit.lms::lang.fields.override_previous_page_text
             span: left
