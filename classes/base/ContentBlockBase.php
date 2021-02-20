@@ -82,14 +82,14 @@ class ContentBlockBase
 
     public function newSubjectResult($subject, $score = 1)
     {
-        // First check if there is already a subject score for this content block / user
-        $subjectResult = Auth::getUser()
+        $result = Auth::getUser()
             ->subject_results()
             ->where('content_block_hash', $this->config['hash'])
-            ->first();
+            ->get();
 
-        if (!$subjectResult) {
-            $subjectResult = SubjectResult::create([
+        if (count($result) < 1 || (count($result) > 0 && $this->page->is_multiple)) {
+            // First check if there is already a subject score for this content block / user
+            return SubjectResult::create([
                 'user_id' => Auth::getUser()->id,
                 'content_block_hash' => $this->config['hash'],
                 'page_id' => $this->page->id,
@@ -98,20 +98,25 @@ class ContentBlockBase
                 'subject' => $subject,
             ]);
         }
-
-        return $subjectResult;
     }
 
     public function newResult($score = null, $maxScore = null, $payload = [])
     {
-        return Result::create([
-            'score' => $score,
-            'max_score' => $maxScore,
-            'user_id' => Auth::getUser()->id,
-            'course_id' => $this->page->course->id,
-            'page_id' => $this->page->id,
-            'content_block_hash' => $this->config['hash'],
-            'payload' => $payload,
-        ]);
+        $result = Auth::getUser()
+            ->subject_results()
+            ->where('content_block_hash', $this->config['hash'])
+            ->get();
+
+        if (count($result) < 1 || (count($result) > 0 && $this->page->is_multiple)) {
+            return Result::create([
+                'score' => $score,
+                'max_score' => $maxScore,
+                'user_id' => Auth::getUser()->id,
+                'course_id' => $this->page->course->id,
+                'page_id' => $this->page->id,
+                'content_block_hash' => $this->config['hash'],
+                'payload' => $payload,
+            ]);
+        }
     }
 }

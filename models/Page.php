@@ -181,12 +181,21 @@ class Page extends Model
             $instance = new $instance($contentBlock, $this);
 
             // Run PHP code before saving
-            if ($contentBlock['code_subject_result']) {
+            $result = Auth::getUser()
+                ->subject_results()
+                ->where('content_block_hash', $contentBlock['hash'])
+                ->get();
+
+            if ($contentBlock['code_subject_result'] && (count($result) < 1 || (count($result) > 0 && $this->is_multiple))) {
                 eval($contentBlock['code_subject_result']);
             }
 
             // Run PHP code before saving
-            if ($contentBlock['code_result']) {
+            $result = Auth::getUser()
+                ->results()
+                ->where('content_block_hash', $contentBlock['hash'])
+                ->get();
+            if ($contentBlock['code_result'] && (count($result) < 1 || (count($result) > 0 && $this->is_multiple))) {
                 eval($contentBlock['code_result']);
             } else {
                 $result = $instance->saveResults();
