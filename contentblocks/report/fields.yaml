@@ -1,0 +1,57 @@
+fields:
+  btn_label:
+    label: Button label
+    span: left
+    type: text
+    default: Download report
+  file_name:
+    label: File name
+    span: right
+  mode:
+    label: Mode
+    type: balloon-selector
+    span: left
+    options:
+      stream: stream
+      download: download
+  charts:
+    label: Charts
+    type: repeater
+    span: full
+    style: accordion
+    form:
+      fields:
+        type:
+          label: Type
+          span: left
+          type: dropdown
+          options:
+            bar: Bar
+            pie: Pie
+        show_legend:
+          label: Show legend
+          span: left
+          default: true
+          type: switch
+        show_x:
+          label: Show X
+          span: left
+          default: true
+          type: switch
+        show_y:
+          label: Show Y
+          span: right
+          default: true
+          type: switch
+        subjects:
+          label: Subjects
+          span: full
+          type: repeater
+          form:
+            fields:
+              key:
+                label: Subject
+                span: left
+              label:
+                label: Label
+                span: right

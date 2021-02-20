@@ -8,5 +8,8 @@
             "email": "sebastiaan@codecycler.com"
         }
     ],
-    "require": {}
+    "require": {
+        "renatio/dynamicpdf-plugin": "dev-master",
+        "bbsnly/chartjs-php": "dev-master"
+    }
 }
