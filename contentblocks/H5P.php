@@ -29,6 +29,6 @@ class H5P extends ContentBlockBase
 
     public function saveResults()
     {
-
+        return $this->newResult(null, null);
     }
 }
