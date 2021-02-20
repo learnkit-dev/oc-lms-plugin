@@ -6,6 +6,9 @@ fields:
     default: Download report
   file_name:
     label: File name
+    span: left
+  pdf_code:
+    label: PDF code
     span: right
   mode:
     label: Mode

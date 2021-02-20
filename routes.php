@@ -89,7 +89,7 @@ Route::get('/lms/report/{courseId}/{pageId}/{content_block_hash}', function ($co
         'user' => Auth::getUser(),
     ];
 
-    $pdf = \Renatio\DynamicPDF\Classes\PDF::loadTemplate('test-report', $data);
+    $pdf = \Renatio\DynamicPDF\Classes\PDF::loadTemplate($contentBlock['pdf_code'], $data);
 
     if ($contentBlock['mode'] == 'stream') {
         return $pdf->stream($contentBlock['file_name']);
