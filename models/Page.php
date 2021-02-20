@@ -94,6 +94,10 @@ class Page extends Model
 
     public function getReorderNameAttribute()
     {
+        if (!$this->course) {
+            return $this->name;
+        }
+
         return $this->course->name . ' - ' . $this->name;
     }
 
