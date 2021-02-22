@@ -179,25 +179,37 @@ class Page extends Model
             $this->activeContentBlockHash = $contentBlock['hash'];
 
             $instance = new $instance($contentBlock, $this);
+            
+            if (Auth::getUser()) {
+                $result = Auth::getUser()
+                    ->subject_results()
+                    ->where('content_block_hash', $contentBlock['hash'])
+                    ->get();
 
-            // Run PHP code before saving
-            $result = Auth::getUser()
-                ->subject_results()
-                ->where('content_block_hash', $contentBlock['hash'])
-                ->get();
+                if ($contentBlock['code_subject_result'] && (count($result) < 1 || (count($result) > 0 && $this->is_multiple))) {
+                    eval($contentBlock['code_subject_result']);
+                }
 
-            if ($contentBlock['code_subject_result'] && (count($result) < 1 || (count($result) > 0 && $this->is_multiple))) {
-                eval($contentBlock['code_subject_result']);
-            }
-
-            // Run PHP code before saving
-            $result = Auth::getUser()
-                ->results()
-                ->where('content_block_hash', $contentBlock['hash'])
-                ->get();
-            if ($contentBlock['code_result'] && (count($result) < 1 || (count($result) > 0 && $this->is_multiple))) {
-                eval($contentBlock['code_result']);
+                // Run PHP code before saving
+                $result = Auth::getUser()
+                    ->results()
+                    ->where('content_block_hash', $contentBlock['hash'])
+                    ->get();
+                if ($contentBlock['code_result'] && (count($result) < 1 || (count($result) > 0 && $this->is_multiple))) {
+                    eval($contentBlock['code_result']);
+                } else {
+                    $result = $instance->saveResults();
+                }
             } else {
+                if ($contentBlock['code_subject_result']) {
+                    eval($contentBlock['code_subject_result']);
+                }
+
+                // Run PHP code before saving
+                if ($contentBlock['code_result']) {
+                    eval($contentBlock['code_result']);
+                }
+
                 $result = $instance->saveResults();
             }
 
