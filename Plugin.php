@@ -60,6 +60,11 @@ class Plugin extends PluginBase
 
         Event::subscribe(User::class);
         Event::subscribe(ContentBlock::class);
+
+        // Extend H5P styles
+        Event::listen('learnkit.h5p.extendStyles', function () {
+            return ['/h5p_override_styles.css'];
+        });
     }
 
     /**

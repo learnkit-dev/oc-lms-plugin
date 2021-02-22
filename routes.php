@@ -97,3 +97,7 @@ Route::get('/lms/report/{courseId}/{pageId}/{content_block_hash}', function ($co
         return $pdf->download($contentBlock['file_name']);
     }
 })->middleware('web');
+
+Route::get('/h5p_override_styles.css', function () {
+    return response(\Cms\Classes\Theme::getActiveTheme()->getCustomData()->custom_css)->header('Content-Type', 'text/css');
+});
