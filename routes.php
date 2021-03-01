@@ -7,6 +7,7 @@ Route::get('/lms/report/{courseId}/{pageId}/{content_block_hash}', function ($co
         ->where('hash', $contentBlockHash)
         ->first();
 
+    $payload = [];
     $user = Auth::getUser();
 
     //
@@ -88,6 +89,13 @@ Route::get('/lms/report/{courseId}/{pageId}/{content_block_hash}', function ($co
         'charts' => $charts,
         'user' => Auth::getUser(),
     ];
+
+    // Run custom PHP code if any
+    if ($contentBlock['custom_php']) {
+        eval($contentBlock['custom_php']);
+    }
+
+    $data['payload'] = $payload;
 
     $pdf = \Renatio\DynamicPDF\Classes\PDF::loadTemplate($contentBlock['pdf_code'], $data);
 

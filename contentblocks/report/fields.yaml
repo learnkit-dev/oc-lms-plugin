@@ -17,6 +17,11 @@ fields:
     options:
       stream: stream
       download: download
+  custom_php:
+    label: Custom PHP
+    type: codeeditor
+    lang: php
+    span: full
   charts:
     label: Charts
     type: repeater
