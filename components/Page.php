@@ -100,7 +100,7 @@ class Page extends ComponentBase
         $results = $this->pageModel->markDone();
 
         if (!$results) {
-            return $this->showError('Nog niet alles is ingevuld!');
+            return $this->showError('Beantwoord bovenstaande vraag om verder te gaan');
         }
 
         // Run PHP code after saving
