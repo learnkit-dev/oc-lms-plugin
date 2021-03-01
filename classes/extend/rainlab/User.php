@@ -4,7 +4,7 @@ use LearnKit\LMS\Models\Course;
 use LearnKit\LMS\Models\Result;
 use RainLab\User\Controllers\Users;
 use LearnKit\LMS\Models\SubjectResult;
-use Kloos\Toolbox\Classes\Base\OctoberExtend;
+use Codecycler\Toolbox\Classes\Base\OctoberExtend;
 
 class User extends OctoberExtend
 {
