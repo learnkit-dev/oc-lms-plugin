@@ -11,6 +11,12 @@ columns:
         label: learnkit.lms::lang.fields.slug
         searchable: true
         sortable: true
+    course:
+        label: learnkit.lms::lang.fields.course
+        searchable: true
+        sortable: true
+        relation: course
+        select: name
     is_active:
         label: learnkit.lms::lang.fields.is_active
         sortable: true
