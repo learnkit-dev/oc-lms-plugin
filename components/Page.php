@@ -99,6 +99,10 @@ class Page extends ComponentBase
         // Mark page done
         $results = $this->pageModel->markDone();
 
+        if (!$results) {
+            return $this->showError('Nog niet alles is ingevuld!');
+        }
+
         // Run PHP code after saving
         if ($this->pageModel->code_after_save) {
             eval($this->pageModel->code_after_save);
@@ -112,5 +116,13 @@ class Page extends ComponentBase
         if (input('redirect')) {
             return redirect(input('redirect'));
         }
+    }
+
+    public function showError($message) : array
+    {
+        $this->page['errorMessage'] = $message;
+        return [
+            '#error-message' => $this->renderPartial('@message'),
+        ];
     }
 }

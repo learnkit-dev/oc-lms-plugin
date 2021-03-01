@@ -79,6 +79,10 @@ tabs:
                             action: show
                             field: use_custom_css_js
                             condition: checked
+                    is_obligatory:
+                        label: learnkit.lms::lang.fields.is_obligatory
+                        type: checkbox
+                        span: left
         properties[override_previous_page_text]:
             label: learnkit.lms::lang.fields.override_previous_page_text
             span: left

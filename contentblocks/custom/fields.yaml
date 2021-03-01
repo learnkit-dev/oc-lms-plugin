@@ -1,0 +1,11 @@
+fields:
+  php_code:
+    label: PHP code
+    span: full
+    type: codeeditor
+    lang: php
+  html_code:
+    label: HTML code
+    span: full
+    type: codeeditor
+    lang: html

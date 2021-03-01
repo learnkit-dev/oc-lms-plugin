@@ -8,6 +8,7 @@ use LearnKit\LMS\ContentBlocks\Text;
 use LearnKit\LMS\ContentBlocks\Form;
 use LearnKit\LMS\ContentBlocks\Chart;
 use LearnKit\LMS\ContentBlocks\Report;
+use LearnKit\LMS\ContentBlocks\Custom;
 use LearnKit\LMS\Classes\Extend\RainLab\User;
 use LearnKit\LMS\ContentBlocks\PickAnItem;
 use LearnKit\LMS\ContentBlocks\CreateAccount;
@@ -147,6 +148,7 @@ class Plugin extends PluginBase
             CreateAccount::class,
             Chart::class,
             Report::class,
+            Custom::class,
         ];
     }
 }

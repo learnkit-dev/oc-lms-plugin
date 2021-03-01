@@ -100,8 +100,23 @@ class ContentBlockBase
         }
     }
 
+    public function isEmpty()
+    {
+        return false;
+    }
+
+    public function beforeRender()
+    {
+    }
+
     public function newResult($score = null, $maxScore = null, $payload = [])
     {
+        $isObligatory = (boolean) $this->config['is_obligatory'];
+
+        if ($this->isEmpty() && $isObligatory) {
+            return false;
+        }
+
         $result = Auth::getUser()
             ->subject_results()
             ->where('content_block_hash', $this->config['hash'])

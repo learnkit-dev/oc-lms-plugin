@@ -43,4 +43,15 @@ class Form extends ContentBlockBase
 
         return $payload;
     }
+
+    public function isEmpty()
+    {
+        foreach ($this->config['fields'] as $field) {
+            if (input($field['uuid']) == '' || !input($field['uuid'])) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

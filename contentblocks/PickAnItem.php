@@ -59,4 +59,13 @@ class PickAnItem extends ContentBlockBase
     {
         return input('picked');
     }
+
+    public function isEmpty()
+    {
+        if (input('picked') === '') {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

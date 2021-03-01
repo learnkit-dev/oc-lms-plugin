@@ -36,6 +36,7 @@
         'custom_js'                     => 'Custom JS',
         'use_custom_css_js'             => 'Use custom CSS and JS',
         'use_custom_code_result'        => 'Use custom code for results',
+        'is_obligatory'                 => 'Is obligatory',
     ],
     'tabs' => [
         'lms'                   => 'LMS',

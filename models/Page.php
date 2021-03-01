@@ -153,11 +153,12 @@ class Page extends Model
             ->getTypeByCode($block['content_block_type']);
 
         $instance = new $instance($block, $this);
-
+        $instance->beforeRender();
         $content = $instance->render();
 
         //
         $twig = new Twig();
+
         return $twig->parse($content, [
             'config' => $block,
             'page' => $this,
@@ -211,6 +212,10 @@ class Page extends Model
                 }
 
                 $result = $instance->saveResults();
+            }
+
+            if ($result === false) {
+                return false;
             }
 
             $results->push($result);
