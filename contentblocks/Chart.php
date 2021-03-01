@@ -55,10 +55,16 @@ class Chart extends ContentBlockBase
                 'scales' => [
                     'yAxes' => [
                         [
+                            'display' => (boolean) $this->config['show_y'],
                             'ticks' => [
                                 'beginAtZero' => true,
                             ],
                         ]
+                    ],
+                    'xAxes' => [
+                        [
+                            'display' => (boolean) $this->config['show_x'],
+                        ],
                     ],
                 ],
             ],

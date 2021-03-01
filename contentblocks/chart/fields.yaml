@@ -19,3 +19,13 @@ fields:
           label: Section label
           type: text
           span: right
+  show_y:
+    label: Show Y
+    span: left
+    type: switch
+    default: true
+  show_x:
+    label: Show X
+    span: left
+    type: switch
+    default: true
