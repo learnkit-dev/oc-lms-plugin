@@ -32,12 +32,16 @@ Route::get('/lms/report/{courseId}/{pageId}/{content_block_hash}', function ($co
     $chartData = [];
     foreach ($contentBlock['charts'] as $chartItem) {
         // Get the data
-        $subjectResults = $user->subject_results()->where('course_id', $course->id)->get();
-        $groupBy = $subjectResults->groupBy('subject');
+        $scores = [];
 
-        $count = $groupBy->map(function ($item) {
-            return count($item);
-        })->toArray();
+        foreach (collect($chartItem['subjects']) as $section) {
+            $score = \LearnKit\LMS\Models\SubjectResult::where('user_id', Auth::getUser()->id)
+                ->where('subject', $section['key'])
+                ->get()
+                ->sum('score');
+
+            $scores[] = $score;
+        }
 
         // Chart options
         $options = [
@@ -65,21 +69,15 @@ Route::get('/lms/report/{courseId}/{pageId}/{content_block_hash}', function ($co
         $chart->options($options);
         $data = new \Bbsnly\ChartJs\Config\Data();
         $labels = collect($chartItem['subjects'])->pluck('label', 'key')->toArray();
-        $subjects = [];
-
-        foreach ($labels as $key => $value) {
-            $subjects[] = $count[$key];
-        }
 
         $datasets = [
-            (new \Bbsnly\ChartJs\Config\Dataset())->data($subjects)->label('Result'),
+            (new \Bbsnly\ChartJs\Config\Dataset())->data($scores)->label('Result'),
         ];
 
         $data->datasets($datasets)->labels(array_values($labels));
 
         $chart->data($data);
 
-        $chartData[] = $count;
         $charts[] = $chart->toJson();
     }
 
