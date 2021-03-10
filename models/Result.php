@@ -23,7 +23,11 @@ class Result extends Model
     /**
      * @var array Fillable fields
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'user_id',
+        'course_id',
+        'page_id',
+    ];
 
     /**
      * @var array Validation rules for attributes
