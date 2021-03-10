@@ -10,6 +10,7 @@
     ],
     "require": {
         "renatio/dynamicpdf-plugin": "dev-master",
-        "bbsnly/chartjs-php": "dev-master"
+        "bbsnly/chartjs-php": "dev-master",
+        "codecycler/oc-extend-plugin": "dev-main"
     }
 }

@@ -4,9 +4,9 @@ use LearnKit\LMS\Models\Course;
 use LearnKit\LMS\Models\Result;
 use RainLab\User\Controllers\Users;
 use LearnKit\LMS\Models\SubjectResult;
-use Codecycler\Toolbox\Classes\Base\OctoberExtend;
+use Codecycler\Extend\Classes\PluginExtender;
 
-class User extends OctoberExtend
+class User extends PluginExtender
 {
     public function model()
     {
