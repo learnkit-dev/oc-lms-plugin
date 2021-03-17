@@ -19,6 +19,9 @@ class Chart extends ContentBlockBase
         $sections = collect($this->config['sections']);
         $scores = [];
 
+        //
+        $colors = collect($this->config['colors'])->pluck('color')->toArray();
+
         foreach ($sections as $section) {
             // Get score for this section
             $score = SubjectResult::where('user_id', $userId)
@@ -37,16 +40,8 @@ class Chart extends ContentBlockBase
                     [
                         'label' => '',
                         'data' => $scores,
-                        'backgroundColor' => [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                        ],
-                        'borderColor' => [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                        ],
+                        'backgroundColor' => $colors,
+                        'borderColor' => $colors,
                         'borderWidth' => 1,
                     ],
                 ],

@@ -29,3 +29,13 @@ fields:
     span: left
     type: switch
     default: true
+  colors:
+    label: Colors
+    span: left
+    type: repeater
+    form:
+      fields:
+        color:
+          label: Color
+          span: full
+          type: colorpicker
