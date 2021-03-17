@@ -122,7 +122,7 @@ class ContentBlockBase
             ->where('content_block_hash', $this->config['hash'])
             ->get();
 
-        if (count($result) < 1 || (count($result) > 0 && $this->page->is_multiple)) {
+        if (count($result) < 1 || (count($result) > 1 && $this->page->is_multiple)) {
             return Result::create([
                 'score' => $score,
                 'max_score' => $maxScore,

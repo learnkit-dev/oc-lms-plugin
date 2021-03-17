@@ -27,6 +27,10 @@ class Result extends Model
         'user_id',
         'course_id',
         'page_id',
+        'max_score',
+        'score',
+        'content_block_hash',
+        'payload',
     ];
 
     /**

@@ -23,7 +23,14 @@ class SubjectResult extends Model
     /**
      * @var array Fillable fields
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'user_id',
+        'content_block_hash',
+        'page_id',
+        'course_id',
+        'score',
+        'subject',
+    ];
 
     /**
      * @var array Validation rules for attributes
