@@ -82,8 +82,13 @@ class ContentBlockBase
 
     public function newSubjectResult($subject, $score = 1)
     {
-        $result = Auth::getUser()
-            ->subject_results()
+        $user = Auth::getUser();
+
+        if (!$user) {
+            return;
+        }
+
+        $result = $user->subject_results()
             ->where('content_block_hash', $this->config['hash'])
             ->get();
 
