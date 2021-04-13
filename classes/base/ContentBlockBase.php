@@ -84,7 +84,7 @@ class ContentBlockBase
     {
         $user = Auth::getUser();
 
-        if (!$user) {
+        if (! $user) {
             return;
         }
 
@@ -122,8 +122,13 @@ class ContentBlockBase
             return false;
         }
 
-        $result = Auth::getUser()
-            ->subject_results()
+        $user = Auth::getUser();
+
+        if (! $user) {
+            return true;
+        }
+
+        $result = $user->subject_results()
             ->where('content_block_hash', $this->config['hash'])
             ->get();
 
