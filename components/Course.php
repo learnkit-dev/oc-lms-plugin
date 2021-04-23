@@ -37,6 +37,6 @@ class Course extends ComponentBase
 
     public function all()
     {
-        return \LearnKit\LMS\Models\Course::all();
+        return \LearnKit\LMS\Models\Course::active()->get();
     }
 }

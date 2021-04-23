@@ -122,9 +122,6 @@ secondaryTabs:
             label: learnkit.lms::lang.fields.course
             type: recordfinder
             list: $/learnkit/lms/models/course/columns.yaml
-        is_active:
-            label: learnkit.lms::lang.fields.is_active
-            type: switch
         is_public:
             label: learnkit.lms::lang.fields.is_public
             type: switch

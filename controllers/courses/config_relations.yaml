@@ -9,3 +9,14 @@ pages:
       direction: asc
   manage:
     form: $/learnkit/lms/models/page/fields_no_relation.yaml
+users:
+  label: learnkit.lms::lang.fields.users
+  view:
+    toolbarButtons: link|unlink
+    list: $/rainlab/user/models/user/columns.yaml
+    recordUrl: rainlab/user/users/update/:id
+    defaultSort:
+      column: surname
+      direction: asc
+  manage:
+    form: $/rainlab/user/models/user/fields.yaml

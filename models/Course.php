@@ -2,6 +2,7 @@
 
 use Auth;
 use Model;
+use RainLab\User\Models\User;
 
 /**
  * Course Model
@@ -78,7 +79,14 @@ class Course extends Model
 
     public $hasOneThrough = [];
     public $belongsTo = [];
-    public $belongsToMany = [];
+
+    public $belongsToMany = [
+        'users' => [
+            User::class,
+            'table' => 'learnkit_lms_courses_users',
+        ],
+    ];
+
     public $morphTo = [];
     public $morphOne = [];
     public $morphMany = [];
@@ -109,10 +117,23 @@ class Course extends Model
 
     public function getIsVisibleAttribute()
     {
-        if (!$this->is_public && !Auth::getUser()) {
+        if ($this->is_public) {
+            return true;
+        }
+
+        if (!Auth::getUser()) {
+            return false;
+        }
+
+        if (!Auth::getUser()->courses->contains($this)) {
             return false;
         }
 
         return true;
+    }
+
+    public function scopeActive($query)
+    {
+        $query->where('is_active', 1);
     }
 }
