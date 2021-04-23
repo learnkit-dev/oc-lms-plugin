@@ -44,3 +44,13 @@ secondaryTabs:
             label: learnkit.lms::lang.fields.display_sidebar
             type: switch
             default: true
+        properties[redirect_after_completion]:
+            label: learnkit.lms::lang.fields.redirect_after_completion
+            type: text
+            span: full
+            default: '/'
+        properties[completion_button_text]:
+            label: learnkit.lms::lang.fields.completion_button_text
+            span: full
+            type: text
+            default: 'Afronden'

@@ -108,13 +108,13 @@ class Page extends ComponentBase
             eval($this->pageModel->code_after_save);
         }
 
+        if (input('redirect')) {
+            return redirect(input('redirect'));
+        }
+
         if (!$this->nextPage) {
             // Course completed
             return [];
-        }
-
-        if (input('redirect')) {
-            return redirect(input('redirect'));
         }
     }
 
