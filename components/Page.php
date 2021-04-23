@@ -2,9 +2,12 @@
 
 use App;
 use Auth;
+use View;
+use Response;
 use Cms\Classes\ComponentBase;
 use LearnKit\LMS\Models\Page as PageModel;
 use LearnKit\LMS\Classes\Helper\ContentBlockHelper;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Page extends ComponentBase
 {
@@ -40,13 +43,21 @@ class Page extends ComponentBase
 
     public function onRun()
     {
+        if (! $this->property('slug')) {
+            return redirect('/');
+        }
+
+        $this->pageModel = PageModel::findBySlug($this->property('slug'));
+
+        if (!$this->pageModel) {
+            return redirect('/');
+        }
+
         $this->prepareVars();
     }
 
     public function prepareVars()
     {
-        $this->pageModel = PageModel::findBySlug($this->property('slug'));
-
         $isPublic = (boolean) $this->pageModel->is_public;
 
         if (!Auth::getUser() && !$isPublic) {
@@ -54,12 +65,14 @@ class Page extends ComponentBase
             return App::abort(403, 'You must be logged in to see this content!');
         }
 
+        //
         $this->nextPage = $this->pageModel->course
             ->pages()
             ->orderBy('sort_order', 'asc')
             ->where('sort_order', '>', $this->pageModel->sort_order)
             ->first();
 
+        //
         $this->previousPage = $this->pageModel->course
             ->pages()
             ->orderBy('sort_order', 'desc')
