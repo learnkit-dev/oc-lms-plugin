@@ -63,3 +63,13 @@ fields:
               label:
                 label: Label
                 span: right
+        colors:
+          label: Colors
+          span: left
+          type: repeater
+          form:
+            fields:
+              color:
+                label: Color
+                span: full
+                type: colorpicker

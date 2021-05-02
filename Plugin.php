@@ -12,6 +12,7 @@ use LearnKit\LMS\ContentBlocks\Custom;
 use LearnKit\LMS\Classes\Extend\RainLab\User;
 use LearnKit\LMS\ContentBlocks\PickAnItem;
 use LearnKit\LMS\ContentBlocks\CreateAccount;
+use LearnKit\LMS\Classes\Helper\ResultHelper;
 use LearnKit\LMS\Classes\Helper\ContentBlockHelper;
 use LearnKit\LMS\Classes\Extend\LearnKit\ContentBlock;
 
@@ -38,16 +39,6 @@ class Plugin extends PluginBase
             'author'      => 'LearnKit',
             'icon'        => 'icon-leaf'
         ];
-    }
-
-    /**
-     * Register method, called when the plugin is first registered.
-     *
-     * @return void
-     */
-    public function register()
-    {
-
     }
 
     /**
@@ -151,4 +142,29 @@ class Plugin extends PluginBase
             Custom::class,
         ];
     }
+
+    public function registerMarkupTags()
+    {
+        return [
+            'filters' => [
+                // A local method, i.e $this->makeTextAllCaps()
+                'encodeUrl' => [$this, 'encodeUrl']
+            ],
+            'functions' => [
+                'resultForPage' => [ResultHelper::class, 'forPage'],
+
+                'resultForBlock' => [ResultHelper::class, 'forBlock'],
+
+                'resultForCourse' => [ResultHelper::class, 'forCourse'],
+            ],
+        ];
+    }
+
+    public function encodeUrl($text)
+    {
+        //$encoded = str_replace(':', '%3A', $text);
+        //$encoded = str_replace(',', '%2C', $encoded);
+        return rawurlencode($text);
+    }
+
 }

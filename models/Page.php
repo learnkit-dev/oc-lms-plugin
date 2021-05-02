@@ -187,6 +187,20 @@ class Page extends Model
                     ->where('content_block_hash', $contentBlock['hash'])
                     ->get();
 
+                // Check for H5P result
+                if ($contentBlock['content_block_type'] === 'learnkit.lms::h5p') {
+                    // Check if result exists
+                    $user = Auth::getUser();
+                    $result = \LearnKit\H5p\Models\Result::where('content_id', $contentBlock['content_id'])
+                        ->where('user_id', $user->id)
+                        ->first();
+
+                    if (!$result) {
+                        return false;
+                    }
+                }
+
+                // Run custom code if exists
                 if ($contentBlock['code_subject_result'] && (count($result) < 1 || (count($result) > 0 && $this->is_multiple))) {
                     eval($contentBlock['code_subject_result']);
                 }

@@ -25,3 +25,7 @@
   - Added subjects to the courses table
   - update_courses_table1.php
   - create_subject_results_table.php
+1.0.10:
+  - Is obligatory on content block is now working for H5P content
+  - Added Twig functions for getting scores for H5P content
+  - Added function for button to reset specific results from DB for current user

@@ -39,6 +39,7 @@
         'is_obligatory'                 => 'Is obligatory',
         'redirect_after_completion'     => 'Redirect after completion',
         'completion_button_text'        => 'Completion button text',
+        'users'                         => 'Users',
     ],
     'tabs' => [
         'lms'                   => 'LMS',
@@ -48,6 +49,7 @@
         'properties'            => 'Properties',
         'code_before_save'      => 'Code before save',
         'code_after_save'       => 'Code after save',
+        'users'                 => 'Users',
     ],
     'menu' => [
         'material'              => 'Material',

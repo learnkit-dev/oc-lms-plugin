@@ -5,7 +5,9 @@ use Auth;
 use View;
 use Response;
 use Cms\Classes\ComponentBase;
+use LearnKit\H5p\Models\Result;
 use LearnKit\LMS\Models\Page as PageModel;
+use LearnKit\H5p\Models\ContentsUserData;
 use LearnKit\LMS\Classes\Helper\ContentBlockHelper;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -58,6 +60,8 @@ class Page extends ComponentBase
 
     public function prepareVars()
     {
+        $this->pageModel = PageModel::findBySlug($this->property('slug'));
+
         $isPublic = (boolean) $this->pageModel->is_public;
 
         if (!Auth::getUser() && !$isPublic) {
@@ -137,5 +141,83 @@ class Page extends ComponentBase
         return [
             '#error-message' => $this->renderPartial('@message'),
         ];
+    }
+
+    public function onResetResults()
+    {
+        // Content block IDs
+        $type = input('type');
+        $id = input('id');
+        $pageId = input('pageId');
+        $methodName = 'reset'.ucfirst($type).'Results';
+
+        if (method_exists($this, $methodName)) {
+            if ($type === 'block') {
+                $this->$methodName($pageId, $id);
+            } else {
+                $this->$methodName($id);
+            }
+        }
+
+        return redirect()->refresh();
+    }
+
+    protected function resetCourseResults($id) : void
+    {
+        $course = \LearnKit\LMS\Models\Course::find($id);
+
+        foreach ($course->pages as $page) {
+            $this->resetPageResults($page->id);
+        }
+    }
+
+    protected function resetPageResults($id) : void
+    {
+        $page = \LearnKit\LMS\Models\Page::find($id);
+
+        foreach ($page->content_blocks as $block) {
+            $this->resetBlockResults($id, $block['hash']);
+        }
+    }
+
+    protected function resetBlockResults($pageId, $hash) : void
+    {
+        $page = \LearnKit\LMS\Models\Page::find($pageId);
+
+        ray(collect($page->content_blocks)->where('hash', $hash));
+
+        $user = Auth::getUser();
+
+        $blocks = collect($page->content_blocks);
+
+        $block = $blocks->where('hash', $hash)->first();
+
+        if ($block['content_block_type'] === 'learnkit.lms::h5p') {
+            $h5pResult = Result::where('user_id', $user->id)
+                ->where('content_id', $block['content_id'])
+                ->first();
+
+            $h5pUserData = ContentsUserData::where('user_id', $user->id)
+                ->where('content_id', $block['content_id'])
+                ->first();
+
+            if ($h5pResult) {
+                $h5pResult->delete();
+            }
+
+            if ($h5pUserData) {
+                $h5pUserData->delete();
+            }
+        }
+
+        // Delete result
+        $result = \LearnKit\LMS\Models\Result::where('user_id', $user->id)
+            ->where('page_id', $pageId)
+            ->first();
+
+        //
+        if ($result) {
+            $result->delete();
+        }
     }
 }

@@ -33,6 +33,7 @@ Route::get('/lms/report/{courseId}/{pageId}/{content_block_hash}', function ($co
     foreach ($contentBlock['charts'] as $chartItem) {
         // Get the data
         $scores = [];
+        $colors = collect($chartItem['colors'])->pluck('color')->toArray();
 
         foreach (collect($chartItem['subjects']) as $section) {
             $score = \LearnKit\LMS\Models\SubjectResult::where('user_id', Auth::getUser()->id)
@@ -70,8 +71,14 @@ Route::get('/lms/report/{courseId}/{pageId}/{content_block_hash}', function ($co
         $data = new \Bbsnly\ChartJs\Config\Data();
         $labels = collect($chartItem['subjects'])->pluck('label', 'key')->toArray();
 
+        $dataSet = (new \Bbsnly\ChartJs\Config\Dataset())->data($scores)->label('Result');
+
+        $dataSet->backgroundColor = $colors;
+        $dataSet->borderColor = $colors;
+        $dataSet->borderWidth = 1;
+
         $datasets = [
-            (new \Bbsnly\ChartJs\Config\Dataset())->data($scores)->label('Result'),
+            $dataSet,
         ];
 
         $data->datasets($datasets)->labels(array_values($labels));
