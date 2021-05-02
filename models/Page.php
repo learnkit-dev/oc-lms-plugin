@@ -188,7 +188,7 @@ class Page extends Model
                     ->get();
 
                 // Check for H5P result
-                if ($contentBlock['content_block_type'] === 'learnkit.lms::h5p') {
+                if ($contentBlock['content_block_type'] === 'learnkit.lms::h5p' && (boolean) $contentBlock['is_obligatory']) {
                     // Check if result exists
                     $user = Auth::getUser();
                     $result = \LearnKit\H5p\Models\Result::where('content_id', $contentBlock['content_id'])
