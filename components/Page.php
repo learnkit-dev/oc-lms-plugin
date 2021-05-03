@@ -159,7 +159,11 @@ class Page extends ComponentBase
             }
         }
 
-        return redirect()->refresh();
+        if (input('redirect')) {
+            return redirect(input('redirect'));
+        } else {
+            return redirect()->refresh();
+        }
     }
 
     protected function resetCourseResults($id) : void
