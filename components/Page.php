@@ -184,8 +184,6 @@ class Page extends ComponentBase
     {
         $page = \LearnKit\LMS\Models\Page::find($pageId);
 
-        ray(collect($page->content_blocks)->where('hash', $hash));
-
         $user = Auth::getUser();
 
         $blocks = collect($page->content_blocks);
