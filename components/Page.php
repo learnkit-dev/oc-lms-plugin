@@ -173,7 +173,17 @@ class Page extends ComponentBase
 
     protected function resetPageResults($id) : void
     {
+        if (is_array($id)) {
+            foreach ($id as $singleId) {
+                $this->resetPageResults($singleId);
+            }
+        }
+
         $page = \LearnKit\LMS\Models\Page::find($id);
+
+        if (!isset($page->content_blocks)) {
+            return;
+        }
 
         foreach ($page->content_blocks as $block) {
             $this->resetBlockResults($id, $block['hash']);
@@ -184,7 +194,9 @@ class Page extends ComponentBase
     {
         $page = \LearnKit\LMS\Models\Page::find($pageId);
 
-        ray(collect($page->content_blocks)->where('hash', $hash));
+        if (!isset($page->content_blocks)) {
+            return;
+        }
 
         $user = Auth::getUser();
 
