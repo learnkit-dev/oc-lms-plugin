@@ -159,6 +159,10 @@ class Page extends ComponentBase
             }
         }
 
+        if (input('redirect')) {
+            return redirect(input('redirect'));
+        }
+        
         return redirect()->refresh();
     }
 
