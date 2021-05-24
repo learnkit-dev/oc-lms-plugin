@@ -25,3 +25,6 @@ columns:
     max_score:
         label: learnkit.lms::lang.fields.max_score
         type: number
+    h5p_result_id:
+        label: H5P result ID
+        type: number

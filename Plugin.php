@@ -15,6 +15,7 @@ use LearnKit\LMS\ContentBlocks\PickAnItem;
 use LearnKit\LMS\ContentBlocks\CreateAccount;
 use LearnKit\LMS\Classes\Helper\ResultHelper;
 use LearnKit\LMS\Classes\Helper\ContentBlockHelper;
+use LearnKit\LMS\Classes\Extend\LearnKit\H5pResult;
 use LearnKit\LMS\Classes\Extend\LearnKit\ContentBlock;
 
 /**
@@ -53,6 +54,7 @@ class Plugin extends PluginBase
 
         Event::subscribe(User::class);
         Event::subscribe(ContentBlock::class);
+        Event::subscribe(H5pResult::class);
 
         // Extend H5P styles
         Event::listen('learnkit.h5p.extendStyles', function () {

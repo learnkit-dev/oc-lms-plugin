@@ -80,6 +80,11 @@ class Result extends Model
         'user' => User::class,
         'page' => Page::class,
         'course' => Course::class,
+        'h5p_result' => [
+            \LearnKit\H5p\Models\Result::class,
+            'key' => 'h5p_result_id',
+            'delete' => true,
+        ],
     ];
 
     public $belongsToMany = [];
