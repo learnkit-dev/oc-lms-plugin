@@ -35,7 +35,7 @@ class H5pHelper
                 $maxScore++;
             }
 
-            if ($result->score === $content->max_score) {
+            if ($result && $result->score === $content->max_score) {
                 $maxScore++;
             }
 
