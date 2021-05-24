@@ -24,12 +24,14 @@ class H5pHelper
         //
         foreach ($users as $user) {
             // Check if result is max score
+            $content = Content::find($id);
+
             $results = Result::where('content_id', $id)
                 ->where('user_id', $user->id)
                 ->get();
 
             foreach ($results as $result) {
-                if ($result->score === $result->max_score) {
+                if ($result->score === $content->max_score) {
                     $maxScore++;
                 }
             }

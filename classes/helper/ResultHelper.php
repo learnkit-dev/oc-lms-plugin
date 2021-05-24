@@ -4,6 +4,7 @@ use Auth;
 use LearnKit\LMS\Models\Page;
 use LearnKit\H5p\Models\Result;
 use LearnKit\LMS\Models\Course;
+use LearnKit\H5p\Models\Content;
 
 class ResultHelper
 {
@@ -39,11 +40,14 @@ class ResultHelper
             $block = (object) $block;
 
             if ($block->content_block_type === 'learnkit.lms::h5p') {
+                // Get the H5P content
+                $content = Content::find($block->content_id);
+
                 // Get the score for a block
                 $h5pResult = Result::where('user_id', $user->id)->where('content_id', $block->content_id)->first();
 
                 if ($h5pResult) {
-                    $result->max += $h5pResult->max_score;
+                    $result->max += $content->max_score;
                     $result->total += $h5pResult->score;
                 }
             }
@@ -88,13 +92,16 @@ class ResultHelper
         //
         if ($block->content_block_type === 'learnkit.lms::h5p') {
             // Get the score for a block
+            $content = Content::find($block->content_id);
+
             $h5pResult = Result::where('user_id', $user->id)->where('content_id', $block->content_id)->first();
+
+            $result->max += $content->max_score;
 
             if (! $h5pResult) {
                 return $result;
             }
 
-            $result->max += $h5pResult->max_score;
             $result->total += $h5pResult->score;
         }
 
@@ -134,6 +141,8 @@ class ResultHelper
                 $block = (object) $block;
 
                 if ($block->content_block_type === 'learnkit.lms::h5p') {
+                    $content = Content::find($block->content_id);
+
                     $maxH5pItemsDone++;
 
                     // Get the score for a block
@@ -144,9 +153,10 @@ class ResultHelper
                     }
 
                     if ($h5pResult) {
-                        $result->max += $h5pResult->max_score;
                         $result->total += $h5pResult->score;
                     }
+
+                    $result->max += $content->max_score;
                 }
             }
         }
