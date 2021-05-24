@@ -39,7 +39,9 @@ class H5pHelper
                 $maxScore++;
             }
 
-            $resultCount++;
+            if ($result) {
+                $resultCount++;
+            }
         }
 
         if ($resultCount < 1) {
