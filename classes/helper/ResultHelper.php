@@ -94,8 +94,6 @@ class ResultHelper
                 return $result;
             }
 
-            ray($h5pResult);
-
             $result->max += $h5pResult->max_score;
             $result->total += $h5pResult->score;
         }
