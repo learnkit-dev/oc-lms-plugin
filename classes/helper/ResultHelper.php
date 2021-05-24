@@ -33,6 +33,7 @@ class ResultHelper
         $result = (object) [
             'total' => 0,
             'max' => 0,
+            'status' => true,
         ];
 
         //
@@ -46,9 +47,12 @@ class ResultHelper
                 // Get the score for a block
                 $h5pResult = Result::where('user_id', $user->id)->where('content_id', $block->content_id)->first();
 
+                $result->max += $content->max_score;
+
                 if ($h5pResult) {
-                    $result->max += $content->max_score;
                     $result->total += $h5pResult->score;
+                } else {
+                    $result->status = false;
                 }
             }
         }
@@ -71,6 +75,7 @@ class ResultHelper
         $result = (object) [
             'total' => 0,
             'max' => 0,
+            'status' => true,
         ];
 
         if (!$page) {
@@ -99,6 +104,7 @@ class ResultHelper
             $result->max += $content->max_score;
 
             if (! $h5pResult) {
+                $result->status = false;
                 return $result;
             }
 
@@ -129,6 +135,7 @@ class ResultHelper
             'total' => 0,
             'max' => 0,
             'percentageDone' => 0,
+            'status' => true,
         ];
 
         $maxH5pItemsDone = 0;
@@ -154,6 +161,10 @@ class ResultHelper
 
                     if ($h5pResult) {
                         $result->total += $h5pResult->score;
+                    }
+
+                    if (!$h5pResult) {
+                        $result->status = false;
                     }
 
                     $result->max += $content->max_score;
