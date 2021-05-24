@@ -26,11 +26,6 @@ tabs:
             type: partial
             path: field_pages
             tab: learnkit.lms::lang.tabs.pages
-        users:
-            span: full
-            type: partial
-            path: field_users
-            tab: learnkit.lms::lang.tabs.users
 secondaryTabs:
     fields:
         image:

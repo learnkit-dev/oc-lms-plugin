@@ -1,31 +1,34 @@
-1.0.1: First version of LMS
+1.0.1: 'First version of LMS'
 1.0.2:
-  - Added Courses
-  - create_courses_table.php
-  - create_courses_users_table.php
+    - 'Added Courses'
+    - create_courses_table.php
+    - create_courses_users_table.php
 1.0.3:
-  - Added pages and content blocks
-  - create_pages_table.php
+    - 'Added pages and content blocks'
+    - create_pages_table.php
 1.0.4:
-  - Added results table
-  - create_results_table.php
+    - 'Added results table'
+    - create_results_table.php
 1.0.5:
-  - Added properties to the pages table
-  - update_pages_table.php
+    - 'Added properties to the pages table'
+    - update_pages_table.php
 1.0.6:
-  - Added code section to the pages table
-  - update_pages_table1.php
+    - 'Added code section to the pages table'
+    - update_pages_table1.php
 1.0.7:
-  - Added multiple setting so pages can be marked to only allow one result
-  - update_pages_table2.php
+    - 'Added multiple setting so pages can be marked to only allow one result'
+    - update_pages_table2.php
 1.0.8:
-  - Added properties to the courses table
-  - update_courses_table.php
+    - 'Added properties to the courses table'
+    - update_courses_table.php
 1.0.9:
-  - Added subjects to the courses table
-  - update_courses_table1.php
-  - create_subject_results_table.php
+    - 'Added subjects to the courses table'
+    - update_courses_table1.php
+    - create_subject_results_table.php
 1.0.10:
-  - Is obligatory on content block is now working for H5P content
-  - Added Twig functions for getting scores for H5P content
-  - Added function for button to reset specific results from DB for current user
+    - 'Is obligatory on content block is now working for H5P content'
+    - 'Added Twig functions for getting scores for H5P content'
+    - 'Added function for button to reset specific results from DB for current user'
+1.0.11:
+    - 'Updated table learnkit_lms_courses'
+    - builder_table_update_learnkit_lms_courses.php

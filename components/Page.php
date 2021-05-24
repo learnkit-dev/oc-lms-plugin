@@ -49,7 +49,10 @@ class Page extends ComponentBase
             return redirect('/');
         }
 
-        $this->pageModel = PageModel::findBySlug($this->property('slug'));
+        // First find course
+        $course = \LearnKit\LMS\Models\Course::findBySlug($this->param('courseSlug'));
+
+        $this->pageModel = $course->pages()->where('slug', $this->property('slug'))->first();
 
         if (!$this->pageModel) {
             return redirect('/');
@@ -60,7 +63,9 @@ class Page extends ComponentBase
 
     public function prepareVars()
     {
-        $this->pageModel = PageModel::findBySlug($this->property('slug'));
+        $course = \LearnKit\LMS\Models\Course::findBySlug($this->param('courseSlug'));
+
+        $this->pageModel = $course->pages()->where('slug', $this->property('slug'))->first();
 
         $isPublic = (boolean) $this->pageModel->is_public;
 

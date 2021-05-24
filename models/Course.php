@@ -3,6 +3,7 @@
 use Auth;
 use Model;
 use RainLab\User\Models\User;
+use LearnKit\LMS\Classes\Helper\ResultHelper;
 
 /**
  * Course Model
@@ -12,7 +13,7 @@ class Course extends Model
     use \October\Rain\Database\Traits\Validation;
 
     public $implement = [
-        '@Kloos.Saas.Behaviors.AttachedToTenant',
+        '@Codecycler\Teams\Concerns\BelongsToTeams',
     ];
 
     /**
@@ -125,7 +126,7 @@ class Course extends Model
             return false;
         }
 
-        if (!Auth::getUser()->courses->contains($this)) {
+        if (!$this->team->users->contains(auth()->user())) {
             return false;
         }
 
@@ -135,5 +136,27 @@ class Course extends Model
     public function scopeActive($query)
     {
         $query->where('is_active', 1);
+    }
+
+    public function getAvgScoreAttribute()
+    {
+        $score = 0;
+        $maxScore = 0;
+        $percentageDone = 0;
+
+        foreach ($this->team->users as $user) {
+            // Get score
+            $uScore = ResultHelper::forCourse($this->id, $user);
+
+            $score += $uScore->total;
+            $maxScore += $uScore->max;
+            $percentageDone += $uScore->percentageDone;
+        }
+
+        return [
+            'score' => $score / count($this->team->users),
+            'max' => $maxScore / count($this->team->users),
+            'percentageDone' => $percentageDone / count($this->team->users),
+        ];
     }
 }

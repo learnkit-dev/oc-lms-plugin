@@ -111,6 +111,10 @@ class Page extends Model
     {
         $contentBlocks = $this->content_blocks;
 
+        if (!$contentBlocks) {
+            return;
+        }
+
         foreach ($contentBlocks as $key => $contentBlock) {
             // Get content block type
             $instance = ContentBlockHelper::instance()

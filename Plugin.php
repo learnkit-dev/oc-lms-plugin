@@ -9,6 +9,7 @@ use LearnKit\LMS\ContentBlocks\Form;
 use LearnKit\LMS\ContentBlocks\Chart;
 use LearnKit\LMS\ContentBlocks\Report;
 use LearnKit\LMS\ContentBlocks\Custom;
+use LearnKit\LMS\Classes\Helper\H5pHelper;
 use LearnKit\LMS\Classes\Extend\RainLab\User;
 use LearnKit\LMS\ContentBlocks\PickAnItem;
 use LearnKit\LMS\ContentBlocks\CreateAccount;
@@ -156,6 +157,10 @@ class Plugin extends PluginBase
                 'resultForBlock' => [ResultHelper::class, 'forBlock'],
 
                 'resultForCourse' => [ResultHelper::class, 'forCourse'],
+
+                'getH5pContent' => [H5pHelper::class, 'getContentById'],
+
+                'percentageById' => [H5pHelper::class, 'percentageById'],
             ],
         ];
     }

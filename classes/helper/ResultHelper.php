@@ -18,13 +18,15 @@ class ResultHelper
      * @param $id
      * @return object
      */
-    public static function forPage($id)
+    public static function forPage($id, $user = null)
     {
         //
         $page = Page::find($id);
 
         //
-        $user = static::user();
+        if (! $user) {
+            $user = static::user();
+        }
 
         //
         $result = (object) [
@@ -51,13 +53,15 @@ class ResultHelper
         return $result;
     }
 
-    public static function forBlock($pageId, $blockId)
+    public static function forBlock($pageId, $blockId, $user = null)
     {
         //
         $page = Page::find($pageId);
 
         //
-        $user = static::user();
+        if (! $user) {
+            $user = static::user();
+        }
 
         //
         $result = (object) [
@@ -65,9 +69,13 @@ class ResultHelper
             'max' => 0,
         ];
 
+        if (!$page) {
+            return $result;
+        }
+
         //
         $blocks = collect($page->content_blocks);
-        $block = $blocks->where('hash', $blockId);
+        $block = $blocks->where('hash', $blockId)->first();
 
         //
         if (!$block) {
@@ -86,6 +94,8 @@ class ResultHelper
                 return $result;
             }
 
+            ray($h5pResult);
+
             $result->max += $h5pResult->max_score;
             $result->total += $h5pResult->score;
         }
@@ -94,7 +104,7 @@ class ResultHelper
         return $result;
     }
 
-    public static function forCourse($id)
+    public static function forCourse($id, $user = null)
     {
         //
         $course = Course::find($id);
@@ -105,13 +115,19 @@ class ResultHelper
         }
 
         //
-        $user = static::user();
+        if (! $user) {
+            $user = static::user();
+        }
 
         //
         $result = (object) [
             'total' => 0,
             'max' => 0,
+            'percentageDone' => 0,
         ];
+
+        $maxH5pItemsDone = 0;
+        $done = 0;
 
         // Loop through all the pages
         foreach ($course->pages as $page) {
@@ -120,8 +136,14 @@ class ResultHelper
                 $block = (object) $block;
 
                 if ($block->content_block_type === 'learnkit.lms::h5p') {
+                    $maxH5pItemsDone++;
+
                     // Get the score for a block
                     $h5pResult = Result::where('user_id', $user->id)->where('content_id', $block->content_id)->first();
+
+                    if ($h5pResult) {
+                        $done++;
+                    }
 
                     if ($h5pResult) {
                         $result->max += $h5pResult->max_score;
@@ -129,6 +151,10 @@ class ResultHelper
                     }
                 }
             }
+        }
+
+        if ($maxH5pItemsDone > 0) {
+            $result->percentageDone = floor($done / $maxH5pItemsDone * 100);
         }
 
         return $result;
