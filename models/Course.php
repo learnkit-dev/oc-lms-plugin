@@ -154,9 +154,9 @@ class Course extends Model
         }
 
         return [
-            'score' => $score / count($this->team->users),
-            'max' => $maxScore / count($this->team->users),
-            'percentageDone' => $percentageDone / count($this->team->users),
+            'score' => floor($score / count($this->team->users)),
+            'max' => floor($maxScore / count($this->team->users)),
+            'percentageDone' => floor($percentageDone / count($this->team->users)),
         ];
     }
 }
