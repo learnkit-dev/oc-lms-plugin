@@ -4,12 +4,24 @@ fields:
     span: left
     type: text
     default: Download report
+    trigger:
+      action: show
+      field: content_block_type
+      condition: value[learnkit.lms::report]
   file_name:
     label: File name
     span: left
+    trigger:
+      action: show
+      field: content_block_type
+      condition: value[learnkit.lms::report]
   pdf_code:
     label: PDF code
     span: right
+    trigger:
+      action: show
+      field: content_block_type
+      condition: value[learnkit.lms::report]
   mode:
     label: Mode
     type: balloon-selector
@@ -17,16 +29,28 @@ fields:
     options:
       stream: stream
       download: download
+    trigger:
+      action: show
+      field: content_block_type
+      condition: value[learnkit.lms::report]
   custom_php:
     label: Custom PHP
     type: codeeditor
     lang: php
     span: full
+    trigger:
+      action: show
+      field: content_block_type
+      condition: value[learnkit.lms::report]
   charts:
     label: Charts
     type: repeater
     span: full
     style: accordion
+    trigger:
+      action: show
+      field: content_block_type
+      condition: value[learnkit.lms::report]
     form:
       fields:
         type:

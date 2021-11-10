@@ -3,7 +3,15 @@ fields:
     label: Is guest
     span: left
     type: checkbox
+    trigger:
+      action: show
+      field: content_block_type
+      condition: value[learnkit.lms::is_guest]
   ask_name:
     label: Ask name
     span: left
     type: checkbox
+    trigger:
+      action: show
+      field: content_block_type
+      condition: value[learnkit.lms::create_account]

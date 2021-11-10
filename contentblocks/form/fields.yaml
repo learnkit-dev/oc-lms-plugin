@@ -3,6 +3,10 @@ fields:
     label: Fields
     span: full
     type: repeater
+    trigger:
+      action: show
+      field: content_block_type
+      condition: value[learnkit.lms::form]
     form:
       fields:
         uuid:

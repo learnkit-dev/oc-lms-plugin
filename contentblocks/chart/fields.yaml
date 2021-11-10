@@ -5,10 +5,18 @@ fields:
     type: dropdown
     options:
       subjectResults: Subject results
+    trigger:
+      action: show
+      field: content_block_type
+      condition: value[learnkit.lms::chart]
   sections:
     label: Sections
     type: repeater
     span: right
+    trigger:
+      action: show
+      field: content_block_type
+      condition: value[learnkit.lms::chart]
     form:
       fields:
         section_key:
@@ -24,15 +32,27 @@ fields:
     span: left
     type: switch
     default: true
+    trigger:
+      action: show
+      field: content_block_type
+      condition: value[learnkit.lms::chart]
   show_x:
     label: Show X
     span: left
     type: switch
     default: true
+    trigger:
+      action: show
+      field: content_block_type
+      condition: value[learnkit.lms::chart]
   colors:
     label: Colors
     span: left
     type: repeater
+    trigger:
+      action: show
+      field: content_block_type
+      condition: value[learnkit.lms::chart]
     form:
       fields:
         color:

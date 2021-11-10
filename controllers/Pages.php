@@ -46,7 +46,7 @@ class Pages extends Controller
     public function update($id)
     {
         $this->bodyClass = 'compact-container';
-
+        
         $this->asExtension('FormController')->update($id);
     }
 }

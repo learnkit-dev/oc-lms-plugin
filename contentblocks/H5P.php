@@ -23,6 +23,11 @@ class H5P extends ContentBlockBase
                 'type' => 'dropdown',
                 'options' => $options,
                 'span' => 'left',
+                'trigger' => [
+                    'action' => 'show',
+                    'field' => 'content_block_type',
+                    'condition' => 'value[learnkit.lms::h5p]',
+                ],
             ],
         ];
     }

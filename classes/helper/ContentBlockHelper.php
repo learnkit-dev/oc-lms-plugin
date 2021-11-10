@@ -40,6 +40,15 @@ class ContentBlockHelper
         return isset($this->mapping[$code]) ? $this->mapping[$code] : null;
     }
 
+    public function getTypes()
+    {
+        if (empty($this->mapping)) {
+            $this->getMapping();
+        }
+
+        return $this->mapping;
+    }
+
     protected function getMapping()
     {
         $options = [];

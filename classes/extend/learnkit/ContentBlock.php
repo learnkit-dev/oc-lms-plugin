@@ -17,17 +17,9 @@ class ContentBlock
                 return;
             }
 
-            if (!isset($formData['content_block_type'])) {
-                return;
-            }
 
-            if ($formData['content_block_type']->value) {
-                $code = $formData['content_block_type']->value;
-
-                $instance = ContentBlockHelper::instance()
-                    ->getTypeByCode($code);
-
-                $instance = new $instance;
+            foreach (ContentBlockHelper::instance()->getTypes() as $key => $class) {
+                $instance = new $class;
 
                 $formWidget->addFields($instance->formFields());
             }

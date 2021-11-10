@@ -17,6 +17,11 @@ class PickAnItem extends ContentBlockBase
                 'label' => 'Options',
                 'type' => 'repeater',
                 'span' => 'full',
+                'trigger' => [
+                    'action' => 'show',
+                    'field' => 'content_block_type',
+                    'condition' => 'value[learnkit.lms::pick_an_item]',
+                ],
                 'form' => [
                     'fields' => [
                         'label' => [

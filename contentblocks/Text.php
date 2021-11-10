@@ -18,6 +18,11 @@ class Text extends ContentBlockBase
                 'type' => 'richeditor',
                 'size' => 'large',
                 'span' => 'full',
+                'trigger' => [
+                    'action' => 'show',
+                    'field' => 'content_block_type',
+                    'condition' => 'value[learnkit.lms::text]',
+                ],
             ],
         ];
     }

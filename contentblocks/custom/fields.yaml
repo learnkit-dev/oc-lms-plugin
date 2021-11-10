@@ -4,8 +4,16 @@ fields:
     span: full
     type: codeeditor
     lang: php
+    trigger:
+      action: show
+      field: content_block_type
+      condition: value[learnkit.lms::custom]
   html_code:
     label: HTML code
     span: full
     type: codeeditor
     lang: html
+    trigger:
+      action: show
+      field: content_block_type
+      condition: value[learnkit.lms::custom]
