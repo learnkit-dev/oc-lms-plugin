@@ -1,5 +1,5 @@
 {
-    "name": "learnkit/oc-lms-plugin",
+    "name": "learnkit/lms-plugin",
     "description": "LMS plugin from LearnKit for October CMS",
     "type": "october-plugin",
     "authors": [

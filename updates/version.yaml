@@ -35,3 +35,6 @@
 1.0.12:
     - 'Updated table learnkit_lms_results'
     - builder_table_update_learnkit_lms_results.php
+1.0.13:
+    - 'Created table learnkit_lms_courses_teams'
+    - builder_table_create_learnkit_lms_courses_teams.php

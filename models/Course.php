@@ -1,9 +1,11 @@
 <?php namespace LearnKit\LMS\Models;
 
 use Auth;
+use Codecycler\Teams\Classes\TeamManager;
 use Model;
 use RainLab\User\Models\User;
 use LearnKit\LMS\Classes\Helper\ResultHelper;
+use System\Classes\PluginManager;
 
 /**
  * Course Model
@@ -13,7 +15,7 @@ class Course extends Model
     use \October\Rain\Database\Traits\Validation;
 
     public $implement = [
-        '@Codecycler\Teams\Concerns\BelongsToTeams',
+        //'@Codecycler\Teams\Concerns\BelongsToTeams',
     ];
 
     /**
@@ -126,8 +128,16 @@ class Course extends Model
             return false;
         }
 
-        if (!$this->team->users->contains(auth()->user())) {
-            return false;
+        if (PluginManager::instance()->exists('Codecycler.Teams')) {
+            $team = TeamManager::instance()->active();
+
+            if (!$team) {
+                return false;
+            }
+
+            if (!$team->team_courses->contains($this)) {
+                return false;
+            }
         }
 
         return true;
@@ -159,4 +169,6 @@ class Course extends Model
             'percentageDone' => floor($percentageDone / count($this->team->users)),
         ];
     }
+
+
 }

@@ -2,6 +2,7 @@
 
 use Event;
 use Backend;
+use LearnKit\LMS\Classes\Extend\Codecycler\Teams;
 use System\Classes\PluginBase;
 use LearnKit\LMS\ContentBlocks\H5P;
 use LearnKit\LMS\ContentBlocks\Text;
@@ -17,6 +18,7 @@ use LearnKit\LMS\Classes\Helper\ResultHelper;
 use LearnKit\LMS\Classes\Helper\ContentBlockHelper;
 use LearnKit\LMS\Classes\Extend\LearnKit\H5pResult;
 use LearnKit\LMS\Classes\Extend\LearnKit\ContentBlock;
+use System\Classes\PluginManager;
 
 /**
  * LMS Plugin Information File
@@ -55,6 +57,10 @@ class Plugin extends PluginBase
         Event::subscribe(User::class);
         Event::subscribe(ContentBlock::class);
         Event::subscribe(H5pResult::class);
+
+        if (PluginManager::instance()->exists('Codecycler.Teams')) {
+            Event::subscribe(Teams::class);
+        }
 
         // Extend H5P styles
         Event::listen('learnkit.h5p.extendStyles', function () {
