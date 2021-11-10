@@ -3,6 +3,7 @@
 use Event;
 use Backend;
 use LearnKit\LMS\Classes\Extend\Codecycler\Teams;
+use LearnKit\LMS\Classes\Extend\LearnKit\Course;
 use System\Classes\PluginBase;
 use LearnKit\LMS\ContentBlocks\H5P;
 use LearnKit\LMS\ContentBlocks\Text;
@@ -60,6 +61,7 @@ class Plugin extends PluginBase
 
         if (PluginManager::instance()->exists('Codecycler.Teams')) {
             Event::subscribe(Teams::class);
+            Event::subscribe(Course::class);
         }
 
         // Extend H5P styles
