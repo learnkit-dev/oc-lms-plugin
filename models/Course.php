@@ -154,7 +154,10 @@ class Course extends Model
         $maxScore = 0;
         $percentageDone = 0;
 
-        foreach ($this->team->users as $user) {
+        // Get the active team
+        $activeTeam = TeamManager::instance()->active();
+
+        foreach ($activeTeam->users as $user) {
             // Get score
             $uScore = ResultHelper::forCourse($this->id, $user);
 
@@ -164,9 +167,9 @@ class Course extends Model
         }
 
         return [
-            'score' => floor($score / count($this->team->users)),
-            'max' => floor($maxScore / count($this->team->users)),
-            'percentageDone' => floor($percentageDone / count($this->team->users)),
+            'score' => floor($score / count($activeTeam->users)),
+            'max' => floor($maxScore / count($activeTeam->users)),
+            'percentageDone' => floor($percentageDone / count($activeTeam->users)),
         ];
     }
 

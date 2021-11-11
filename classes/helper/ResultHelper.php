@@ -144,6 +144,7 @@ class ResultHelper
         // Loop through all the pages
         foreach ($course->pages as $page) {
             // Loop through all the content blocks
+
             foreach ($page->content_blocks as $block) {
                 $block = (object) $block;
 

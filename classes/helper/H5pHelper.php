@@ -31,7 +31,7 @@ class H5pHelper
                 ->orderBy('score', 'desc')
                 ->first();
 
-            if ($result && $result->score === $content->max_score) {
+            if ($result && $result->score >= $content->max_score) {
                 $maxScore++;
             }
 
