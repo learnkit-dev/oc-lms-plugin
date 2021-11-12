@@ -40,6 +40,7 @@
         'redirect_after_completion'     => 'Redirect after completion',
         'completion_button_text'        => 'Completion button text',
         'users'                         => 'Users',
+        'code'                          => 'Code',
     ],
     'tabs' => [
         'lms'                   => 'LMS',

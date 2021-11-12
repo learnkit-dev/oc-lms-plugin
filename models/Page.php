@@ -109,6 +109,10 @@ class Page extends Model
 
     public function beforeSave()
     {
+        if (! $this->code) {
+            $this->code = Uuid::uuid4();
+        }
+
         $contentBlocks = $this->content_blocks;
 
         if (!$contentBlocks) {
@@ -137,6 +141,12 @@ class Page extends Model
     public static function findBySlug($slug)
     {
         return static::where('slug', $slug)
+            ->first();
+    }
+
+    public static function findByCode($code)
+    {
+        return static::where('code', $code)
             ->first();
     }
 
@@ -177,70 +187,72 @@ class Page extends Model
         $results = collect([]);
 
         // Loop through all the content blocks and create a new result record
-        foreach ($this->content_blocks as $contentBlock) {
-            $instance = ContentBlockHelper::instance()
-                ->getTypeByCode($contentBlock['content_block_type']);
+        if ($this->content_blocks) {
+            foreach ($this->content_blocks as $contentBlock) {
+                $instance = ContentBlockHelper::instance()
+                    ->getTypeByCode($contentBlock['content_block_type']);
 
-            $this->activeContentBlockHash = $contentBlock['hash'];
+                $this->activeContentBlockHash = $contentBlock['hash'];
 
-            $instance = new $instance($contentBlock, $this);
-            
-            if (Auth::getUser()) {
-                $result = Auth::getUser()
-                    ->subject_results()
-                    ->where('content_block_hash', $contentBlock['hash'])
-                    ->get();
+                $instance = new $instance($contentBlock, $this);
 
-                // Check for H5P result
-                if ($contentBlock['content_block_type'] === 'learnkit.lms::h5p' && (boolean) $contentBlock['is_obligatory']) {
-                    // Check if result exists
-                    $user = Auth::getUser();
-                    $result = \LearnKit\H5p\Models\Result::where('content_id', $contentBlock['content_id'])
-                        ->where('user_id', $user->id)
-                        ->first();
+                if (Auth::getUser()) {
+                    $result = Auth::getUser()
+                        ->subject_results()
+                        ->where('content_block_hash', $contentBlock['hash'])
+                        ->get();
 
-                    if (!$result) {
-                        return false;
+                    // Check for H5P result
+                    if ($contentBlock['content_block_type'] === 'learnkit.lms::h5p' && (boolean) $contentBlock['is_obligatory']) {
+                        // Check if result exists
+                        $user = Auth::getUser();
+                        $result = \LearnKit\H5p\Models\Result::where('content_id', $contentBlock['content_id'])
+                            ->where('user_id', $user->id)
+                            ->first();
+
+                        if (!$result) {
+                            return false;
+                        }
                     }
-                }
 
-                // Run custom code if exists
-                if ($contentBlock['code_subject_result'] && (count($result) < 1 || (count($result) > 0 && $this->is_multiple))) {
-                    eval($contentBlock['code_subject_result']);
-                }
+                    // Run custom code if exists
+                    if ($contentBlock['code_subject_result'] && (count($result) < 1 || (count($result) > 0 && $this->is_multiple))) {
+                        eval($contentBlock['code_subject_result']);
+                    }
 
-                // Run PHP code before saving
-                $result = Auth::getUser()
-                    ->results()
-                    ->where('content_block_hash', $contentBlock['hash'])
-                    ->get();
-                if ($contentBlock['code_result'] && (count($result) < 1 || (count($result) > 0 && $this->is_multiple))) {
-                    eval($contentBlock['code_result']);
+                    // Run PHP code before saving
+                    $result = Auth::getUser()
+                        ->results()
+                        ->where('content_block_hash', $contentBlock['hash'])
+                        ->get();
+                    if ($contentBlock['code_result'] && (count($result) < 1 || (count($result) > 0 && $this->is_multiple))) {
+                        eval($contentBlock['code_result']);
+                    } else {
+                        $result = $instance->saveResults();
+                    }
                 } else {
+                    if ($contentBlock['code_subject_result']) {
+                        eval($contentBlock['code_subject_result']);
+                    }
+
+                    // Run PHP code before saving
+                    if ($contentBlock['code_result']) {
+                        eval($contentBlock['code_result']);
+                    }
+
                     $result = $instance->saveResults();
                 }
-            } else {
-                if ($contentBlock['code_subject_result']) {
-                    eval($contentBlock['code_subject_result']);
+
+                if ($result === false) {
+                    return false;
                 }
 
-                // Run PHP code before saving
-                if ($contentBlock['code_result']) {
-                    eval($contentBlock['code_result']);
-                }
-
-                $result = $instance->saveResults();
+                $results->push($result);
             }
-
-            if ($result === false) {
-                return false;
-            }
-
-            $results->push($result);
         }
 
         // Mark whole page done when no content blocks exists
-        if (count($this->content_blocks) < 1) {
+        if ($this->content_blocks && count($this->content_blocks) < 1) {
             $result = Result::create([
                 'user_id' => Auth::getUser()->id,
                 'course_id' => $this->course->id,

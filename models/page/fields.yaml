@@ -122,6 +122,10 @@ secondaryTabs:
             label: learnkit.lms::lang.fields.course
             type: recordfinder
             list: $/learnkit/lms/models/course/columns.yaml
+        code:
+            label: learnkit.lms::lang.fields.code
+            type: text
+            disabled: true
         is_public:
             label: learnkit.lms::lang.fields.is_public
             type: switch
@@ -129,3 +133,9 @@ secondaryTabs:
             label: learnkit.lms::lang.fields.is_multiple
             type: switch
             default: true
+        preview:
+            type: partial
+            path: $/learnkit/lms/controllers/pages/_preview.htm
+            context:
+                - update
+                - preview

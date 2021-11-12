@@ -30,8 +30,8 @@ class Page extends ComponentBase
     public function defineProperties()
     {
         return [
-            'slug' => [
-                'title'             => 'learnkit.lms::lang.fields.slug',
+            'code' => [
+                'title'             => 'learnkit.lms::lang.fields.code',
                 'description'       => '',
                 'type'              => 'string',
             ],
@@ -45,14 +45,8 @@ class Page extends ComponentBase
 
     public function onRun()
     {
-        if (! $this->property('slug')) {
-            return redirect('/');
-        }
-
         // First find course
-        $course = \LearnKit\LMS\Models\Course::findBySlug($this->param('courseSlug'));
-
-        $this->pageModel = $course->pages()->where('slug', $this->property('slug'))->first();
+        $this->pageModel = \LearnKit\LMS\Models\Page::findByCode($this->property('code'));
 
         if (!$this->pageModel) {
             return redirect('/');
@@ -63,9 +57,7 @@ class Page extends ComponentBase
 
     public function prepareVars()
     {
-        $course = \LearnKit\LMS\Models\Course::findBySlug($this->param('courseSlug'));
-
-        $this->pageModel = $course->pages()->where('slug', $this->property('slug'))->first();
+        $this->pageModel = \LearnKit\LMS\Models\Page::findByCode($this->property('code'));
 
         $isPublic = (boolean) $this->pageModel->is_public;
 
@@ -94,11 +86,13 @@ class Page extends ComponentBase
         $this->page['nextPage'] = $this->nextPage;
 
         // Add the ability for content blocks to add assets
-        foreach ($this->pageModel->content_blocks as $contentBlock) {
-            $type = ContentBlockHelper::instance()->getTypeByCode($contentBlock['content_block_type']);
-            $instance = new $type($contentBlock, $this->pageModel);
+        if ($this->pageModel->content_blocks) {
+            foreach ($this->pageModel->content_blocks as $contentBlock) {
+                $type = ContentBlockHelper::instance()->getTypeByCode($contentBlock['content_block_type']);
+                $instance = new $type($contentBlock, $this->pageModel);
 
-            $this->addJs($instance->getPath() . '/script.js');
+                $this->addJs($instance->getPath() . '/script.js');
+            }
         }
     }
 
