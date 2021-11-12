@@ -1,7 +1,9 @@
 <?php namespace LearnKit\LMS\Controllers;
 
+use Flash;
 use BackendMenu;
 use Backend\Classes\Controller;
+use LearnKit\LMS\Models\Page;
 
 /**
  * Pages Back-end Controller
@@ -48,5 +50,16 @@ class Pages extends Controller
         $this->bodyClass = 'compact-container';
 
         $this->asExtension('FormController')->update($id);
+    }
+
+    public function onDuplicate()
+    {
+        foreach (input('checked') as $pageId) {
+            Page::find($pageId)->duplicate();
+        }
+
+        Flash::success('Duplicated succeeded!');
+
+        return $this->listRefresh();
     }
 }

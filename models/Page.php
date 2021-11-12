@@ -1,6 +1,7 @@
 <?php namespace LearnKit\LMS\Models;
 
 use Auth;
+use LearnKit\H5p\Models\Content;
 use Model;
 use Ramsey\Uuid\Uuid;
 use October\Rain\Parse\Twig;
@@ -91,6 +92,41 @@ class Page extends Model
     public $attachMany = [];
 
     protected $activeContentBlockHash;
+
+    public function duplicate()
+    {
+        $newPage = $this->replicate();
+
+        $newPage->code = null;
+        $newPage->course_id = null;
+        $newPage->slug = null;
+        $newPage->sort_order = null;
+
+        //
+        $newPage->name = "Copy {$this->name}";
+
+        if ($this->content_blocks) {
+            $contentBlocks = $newPage->content_blocks;
+
+            foreach ($contentBlocks as $key => $contentBlock) {
+                $contentBlocks[$key]['hash'] = Uuid::uuid4();
+
+                if ($contentBlock['content_block_type'] === 'learnkit.lms::h5p') {
+                    $h5p = Content::find($contentBlock['content_id']);
+
+                    if ($h5p) {
+                        $newH5p = $h5p->duplicate();
+
+                        $contentBlocks[$key]['content_id'] = $newH5p->id;
+                    }
+                }
+            }
+
+            $newPage->content_blocks = $contentBlocks;
+        }
+
+        $newPage->save();
+    }
 
     public function getReorderNameAttribute()
     {
