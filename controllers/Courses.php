@@ -1,7 +1,10 @@
 <?php namespace LearnKit\LMS\Controllers;
 
+use Flash;
+use Backend;
 use BackendMenu;
 use Backend\Classes\Controller;
+use LearnKit\LMS\Models\Course;
 
 /**
  * Courses Back-end Controller
@@ -48,5 +51,16 @@ class Courses extends Controller
         $this->bodyClass = 'compact-container';
 
         $this->asExtension('FormController')->update($id);
+    }
+
+    public function onDuplicate($id)
+    {
+        $course = Course::find($id);
+
+        $newCourse = $course->duplicate();
+
+        Flash::success('Succeeded!');
+
+        return redirect(Backend::url("learnkit/lms/courses/update/{$newCourse->id}"));
     }
 }

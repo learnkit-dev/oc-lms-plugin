@@ -93,7 +93,7 @@ class Page extends Model
 
     protected $activeContentBlockHash;
 
-    public function duplicate()
+    public function duplicate($rename = true)
     {
         $newPage = $this->replicate();
 
@@ -103,7 +103,9 @@ class Page extends Model
         $newPage->sort_order = null;
 
         //
-        $newPage->name = "Copy {$this->name}";
+        if ($rename) {
+            $newPage->name = "{$this->name} copy";
+        }
 
         if ($this->content_blocks) {
             $contentBlocks = $newPage->content_blocks;
@@ -126,6 +128,8 @@ class Page extends Model
         }
 
         $newPage->save();
+
+        return $newPage;
     }
 
     public function getReorderNameAttribute()

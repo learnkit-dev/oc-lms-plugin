@@ -77,7 +77,10 @@ class Course extends Model
     public $hasOne = [];
 
     public $hasMany = [
-        'pages' => Page::class,
+        'pages' => [
+            Page::class,
+            'delete' => true,
+        ],
     ];
 
     public $hasOneThrough = [];
@@ -173,5 +176,18 @@ class Course extends Model
         ];
     }
 
+    public function duplicate()
+    {
+        $newCourse = $this->replicate();
+        $newCourse->is_active = false;
+        $newCourse->name = "{$this->name} copy";
+        $newCourse->save();
 
+        foreach ($this->pages as $page) {
+            $newPage = $page->duplicate(false);
+            $newCourse->pages()->add($newPage);
+        }
+
+        return $newCourse;
+    }
 }

@@ -3,6 +3,12 @@
 # ===================================
 
 fields:
+    toolbar:
+        type: partial
+        path: $/learnkit/lms/controllers/courses/_update_toolbar.htm
+        context:
+            - update
+            - preview
     name:
         label: learnkit.lms::lang.fields.name
         span: left
