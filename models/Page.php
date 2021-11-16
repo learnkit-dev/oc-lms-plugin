@@ -374,4 +374,9 @@ class Page extends Model
             return false;
         }
     }
+
+    public function scopeIsActive($query)
+    {
+        $query->where('is_active', 1);
+    }
 }

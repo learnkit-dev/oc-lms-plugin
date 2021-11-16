@@ -126,6 +126,9 @@ secondaryTabs:
             label: learnkit.lms::lang.fields.code
             type: text
             disabled: true
+        is_active:
+            label: learnkit.lms::lang.fields.is_active
+            type: switch
         is_public:
             label: learnkit.lms::lang.fields.is_public
             type: switch

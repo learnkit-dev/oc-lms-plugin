@@ -71,6 +71,7 @@ class Page extends ComponentBase
             ->pages()
             ->orderBy('sort_order', 'asc')
             ->where('sort_order', '>', $this->pageModel->sort_order)
+            ->where('is_active', 1)
             ->first();
 
         //
@@ -78,6 +79,7 @@ class Page extends ComponentBase
             ->pages()
             ->orderBy('sort_order', 'desc')
             ->where('sort_order', '<', $this->pageModel->sort_order)
+            ->where('is_active', 1)
             ->first();
 
         //
