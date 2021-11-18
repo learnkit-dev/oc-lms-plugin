@@ -2,6 +2,7 @@
 
 use Auth;
 use Codecycler\Teams\Classes\TeamManager;
+use Codecycler\Teams\Models\Team;
 use Model;
 use RainLab\User\Models\User;
 use LearnKit\LMS\Classes\Helper\ResultHelper;
@@ -151,14 +152,18 @@ class Course extends Model
         $query->where('is_active', 1);
     }
 
-    public function getAvgScoreAttribute()
+    public function avgScore($teamId = null)
     {
+        if ($teamId) {
+            $activeTeam = Team::find($teamId);
+        } else {
+            $activeTeam = TeamManager::instance()->active();
+        }
+
+        //
         $score = 0;
         $maxScore = 0;
         $percentageDone = 0;
-
-        // Get the active team
-        $activeTeam = TeamManager::instance()->active();
 
         foreach ($activeTeam->users as $user) {
             // Get score
@@ -170,9 +175,9 @@ class Course extends Model
         }
 
         return [
-            'score' => floor($score / count($activeTeam->users)),
-            'max' => floor($maxScore / count($activeTeam->users)),
-            'percentageDone' => floor($percentageDone / count($activeTeam->users)),
+            'score' => round($score / count($activeTeam->users), 2),
+            'max' => round($maxScore / count($activeTeam->users), 2),
+            'percentageDone' => round($percentageDone / count($activeTeam->users), 1),
         ];
     }
 

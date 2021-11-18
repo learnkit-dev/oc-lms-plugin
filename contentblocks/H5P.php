@@ -13,9 +13,11 @@ class H5P extends ContentBlockBase
 
     public function formFields()
     {
-        $options = Content::all()
-            ->pluck('title', 'id')
-            ->toArray();
+        $options = [];
+
+        foreach (Content::all() as $content) {
+            $options[$content->id] = "{$content->title} - {$content->id}";
+        }
 
         return [
             'content_id' => [
