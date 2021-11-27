@@ -41,6 +41,7 @@
         'completion_button_text'        => 'Completion button text',
         'users'                         => 'Users',
         'code'                          => 'Code',
+        'teams'                         => 'Teams',
     ],
     'tabs' => [
         'lms'                   => 'LMS',

@@ -4,6 +4,7 @@ use Auth;
 use Codecycler\Teams\Classes\TeamManager;
 use Codecycler\Teams\Models\Team;
 use Model;
+use October\Rain\Database\Traits\Sortable;
 use RainLab\User\Models\User;
 use LearnKit\LMS\Classes\Helper\ResultHelper;
 use System\Classes\PluginManager;
@@ -14,6 +15,7 @@ use System\Classes\PluginManager;
 class Course extends Model
 {
     use \October\Rain\Database\Traits\Validation;
+    use Sortable;
 
     public $implement = [
         //'@Codecycler\Teams\Concerns\BelongsToTeams',

@@ -41,3 +41,6 @@
 1.0.14:
     - 'Updated table learnkit_lms_pages'
     - builder_table_update_learnkit_lms_pages.php
+1.0.15:
+    - 'Updated table learnkit_lms_courses'
+    - builder_table_update_learnkit_lms_courses_2.php

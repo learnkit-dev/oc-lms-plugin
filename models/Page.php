@@ -379,4 +379,9 @@ class Page extends Model
     {
         $query->where('is_active', 1);
     }
+
+    public function getTeamNamesAttribute()
+    {
+        return implode(', ', $this->course->teams->pluck('name')->toArray());
+    }
 }

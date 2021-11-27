@@ -16,6 +16,18 @@ class Course extends PluginExtender
         return Courses::class;
     }
 
+    public function addColumns()
+    {
+        return [
+            'teams' => [
+                'label' => 'learnkit.lms::lang.fields.teams',
+                'relation' => 'teams',
+                'select' => 'name',
+                'searchable' => 'true',
+            ],
+        ];
+    }
+
     public function addTabFields()
     {
         return [

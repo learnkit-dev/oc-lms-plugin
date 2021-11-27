@@ -11,20 +11,25 @@ columns:
         label: learnkit.lms::lang.fields.user
         relation: user
         select: email
+        searchable: true
     course:
         label: learnkit.lms::lang.fields.course
         relation: course
         select: name
+        searchable: true
     page:
         label: learnkit.lms::lang.fields.page
         relation: page
         select: name
+        searchable: true
     score:
         label: learnkit.lms::lang.fields.score
         type: number
+        sortable: true
     max_score:
         label: learnkit.lms::lang.fields.max_score
         type: number
+        sortable: true
     h5p_result_id:
         label: H5P result ID
         type: number
