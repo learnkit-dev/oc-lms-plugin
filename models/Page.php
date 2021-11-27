@@ -382,6 +382,10 @@ class Page extends Model
 
     public function getTeamNamesAttribute()
     {
-        return implode(', ', $this->course->teams->pluck('name')->toArray());
+        if ($this->course) {
+            return implode(', ', $this->course->teams->pluck('name')->toArray());
+        }
+
+        return '-';
     }
 }
