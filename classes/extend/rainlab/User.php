@@ -1,6 +1,7 @@
 <?php namespace LearnKit\LMS\Classes\Extend\RainLab;
 
 use LearnKit\LMS\Models\Course;
+use LearnKit\LMS\Models\Department;
 use LearnKit\LMS\Models\Result;
 use RainLab\User\Controllers\Users;
 use LearnKit\LMS\Models\SubjectResult;
@@ -21,17 +22,18 @@ class User extends PluginExtender
     public function addTabFields()
     {
         return [
-            'courses' => [
-                'label' => 'learnkit.lms::lang.fields.courses',
-                'type'  => 'relation',
-                'tab'   => 'learnkit.lms::lang.tabs.lms',
-                'span'  => 'left',
-            ],
             'results' => [
                 'label' => '',
                 'type'  => 'partial',
                 'path'  => '$/learnkit/lms/partials/user_results.htm',
                 'tab'   => 'learnkit.lms::lang.tabs.results',
+                'span'  => 'full',
+            ],
+            'departments' => [
+                'label' => '',
+                'type'  => 'partial',
+                'path'  => '$/learnkit/lms/partials/user_departments.htm',
+                'tab'   => 'learnkit.lms::lang.tabs.departments',
                 'span'  => 'full',
             ],
         ];
@@ -50,6 +52,16 @@ class User extends PluginExtender
                     'list' => '$/learnkit/lms/models/result/columns.yaml',
                 ],
             ],
+            'departments' => [
+                'label' => 'group',
+                'manage'    => [
+                    'form' => '$/learnkit/lms/models/department/fields.yaml',
+                ],
+                'view'      => [
+                    'toolbarButtons' => 'delete',
+                    'list' => '$/learnkit/lms/models/department/columns.yaml',
+                ],
+            ],
         ];
     }
 
@@ -59,6 +71,10 @@ class User extends PluginExtender
             'courses' => [
                 Course::class,
                 'table' => 'learnkit_lms_courses_users',
+            ],
+            'departments' => [
+                Department::class,
+                'table' => 'learnkit_lms_departments_users',
             ],
         ];
     }

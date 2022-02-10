@@ -1,0 +1,13 @@
+columns:
+    name:
+        label: 'learnkit.lms::lang.fields.name'
+        type: text
+        searchable: true
+        sortable: true
+    team:
+        label: 'learnkit.lms::lang.fields.team'
+        type: text
+        searchable: true
+        sortable: true
+        select: name
+        relation: team

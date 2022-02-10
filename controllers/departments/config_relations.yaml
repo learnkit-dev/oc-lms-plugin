@@ -1,0 +1,6 @@
+users:
+  label: Users
+  manage:
+    form: $/rainlab/user/models/user/fields.yaml
+  view:
+    list: $/rainlab/user/models/user/columns.yaml

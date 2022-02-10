@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Department
+
+# Model Form Field configuration
+form: $/learnkit/lms/models/department/fields.yaml
+
+# Model Class name
+modelClass: LearnKit\LMS\Models\Department
+
+# Default redirect location
+defaultRedirect: learnkit/lms/departments
+
+# Create page
+create:
+    title: backend::lang.form.create_title
+    redirect: learnkit/lms/departments/update/:id
+    redirectClose: learnkit/lms/departments
+
+# Update page
+update:
+    title: backend::lang.form.update_title
+    redirect: learnkit/lms/departments
+    redirectClose: learnkit/lms/departments
+
+# Preview page
+preview:
+    title: backend::lang.form.preview_title

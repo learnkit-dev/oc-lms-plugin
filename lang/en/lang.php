@@ -42,6 +42,7 @@
         'users'                         => 'Users',
         'code'                          => 'Code',
         'teams'                         => 'Teams',
+        'team'                          => 'Team',
     ],
     'tabs' => [
         'lms'                   => 'LMS',
@@ -52,6 +53,8 @@
         'code_before_save'      => 'Code before save',
         'code_after_save'       => 'Code after save',
         'users'                 => 'Users',
+        'results'               => 'Results',
+        'departments'           => 'Groups',
     ],
     'menu' => [
         'material'              => 'Material',
@@ -59,6 +62,7 @@
         'pages'                 => 'Pages',
         'content_blocks'        => 'Content blocks',
         'results'               => 'Results',
+        'departments'           => 'Departments',
     ],
     'permissions' => [
         'manage_courses'        => 'Manage courses',

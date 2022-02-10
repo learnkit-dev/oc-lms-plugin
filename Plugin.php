@@ -137,6 +137,12 @@ class Plugin extends PluginBase
                         'icon'          => 'icon-star',
                         'permissions'   => ['learnkit.lms::manage_pages'],
                     ],
+                    'departments' => [
+                        'label'         => 'learnkit.lms::lang.menu.departments',
+                        'url'           => Backend::url('learnkit/lms/departments'),
+                        'icon'          => 'icon-building',
+                        'permissions'   => ['learnkit.lms::manage_courses'],
+                    ],
                 ],
             ],
         ];

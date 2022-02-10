@@ -44,3 +44,12 @@
 1.0.15:
     - 'Updated table learnkit_lms_courses'
     - builder_table_update_learnkit_lms_courses_2.php
+1.0.16:
+    - 'Created table learnkit_lms_departments'
+    - builder_table_create_learnkit_lms_departments.php
+1.0.17:
+    - 'Created table learnkit_lms_departments_users'
+    - builder_table_create_learnkit_lms_departments_users.php
+1.0.18:
+    - 'Updated table learnkit_lms_departments'
+    - builder_table_update_learnkit_lms_departments.php

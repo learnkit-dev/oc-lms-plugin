@@ -1,0 +1,12 @@
+fields:
+    name:
+        label: 'learnkit.lms::lang.fields.name'
+        span: auto
+        type: text
+tabs:
+    fields:
+        users:
+            type: partial
+            path: field_users
+            span: full
+            tab: Users

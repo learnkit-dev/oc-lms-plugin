@@ -3,6 +3,7 @@
 use LearnKit\LMS\Models\Course;
 use Codecycler\Teams\Models\Team;
 use Codecycler\Extend\Classes\PluginExtender;
+use LearnKit\LMS\Models\Department;
 
 class Teams extends PluginExtender
 {
@@ -22,6 +23,15 @@ class Teams extends PluginExtender
             'team_courses' => [
                 Course::class,
                 'table' => 'learnkit_lms_courses_teams',
+            ],
+        ];
+    }
+
+    public function hasMany()
+    {
+        return [
+            'departments' => [
+                Department::class,
             ],
         ];
     }
