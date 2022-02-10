@@ -58,7 +58,8 @@ class User extends PluginExtender
                     'form' => '$/learnkit/lms/models/department/fields.yaml',
                 ],
                 'view'      => [
-                    'toolbarButtons' => 'delete',
+                    'recordOnClick' => 'javascript:;',
+                    'toolbarButtons' => 'link|unlink',
                     'list' => '$/learnkit/lms/models/department/columns.yaml',
                 ],
             ],
