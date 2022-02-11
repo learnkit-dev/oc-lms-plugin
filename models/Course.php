@@ -154,12 +154,10 @@ class Course extends Model
         $query->where('is_active', 1);
     }
 
-    public function avgScore($teamId = null)
+    public function avgScore($groupId = null)
     {
-        if ($teamId) {
-            $activeTeam = Team::find($teamId);
-        } else {
-            $activeTeam = TeamManager::instance()->active();
+        if ($groupId) {
+            $group = Department::find($groupId);
         }
 
         //
@@ -167,7 +165,7 @@ class Course extends Model
         $maxScore = 0;
         $percentageDone = 0;
 
-        foreach ($activeTeam->users as $user) {
+        foreach ($group->users as $user) {
             // Get score
             $uScore = ResultHelper::forCourse($this->id, $user);
 
@@ -177,9 +175,9 @@ class Course extends Model
         }
 
         return [
-            'score' => round($score / count($activeTeam->users), 2),
-            'max' => round($maxScore / count($activeTeam->users), 2),
-            'percentageDone' => round($percentageDone / count($activeTeam->users), 1),
+            'score' => round($score / count($group->users), 2),
+            'max' => round($maxScore / count($group->users), 2),
+            'percentageDone' => round($percentageDone / count($group->users), 1),
         ];
     }
 

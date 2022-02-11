@@ -11,9 +11,13 @@ class H5pHelper
         return Content::find($id);
     }
 
-    public static function percentageById($id)
+    public static function percentageById($id, $users = null)
     {
         $userIds = Result::all()->groupBy('user_id')->keys()->toArray();
+
+        if ($users) {
+            $userIds = array_intersect($userIds, $users->pluck('id')->toArray());
+        }
 
         $users = User::whereIn('id', $userIds)->get();
 
