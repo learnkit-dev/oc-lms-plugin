@@ -1,6 +1,10 @@
 users:
   label: Users
   manage:
+    showSearch: true
     form: $/rainlab/user/models/user/fields.yaml
+    recordsPerPage: 50
   view:
+    toolbarButtons: link|unlink
+    showSearch: true
     list: $/rainlab/user/models/user/columns.yaml
