@@ -139,6 +139,12 @@ Route::get('/export/{teamId}', function ($teamId) {
 
     // Add header items for each course
     foreach ($courses as $course) {
+        $max = ResultHelper::forCourse($course->id, $team->users()->first())->max;
+
+        if ($max === 0) {
+            continue;
+        }
+
         $rowHeaders->push($course->name . ' gedaan');
         $rowHeaders->push($course->name . ' score');
     }
@@ -163,6 +169,10 @@ Route::get('/export/{teamId}', function ($teamId) {
 
         // Add scores for each course
         foreach ($courses as $course) {
+            if (ResultHelper::forCourse($course->id, $user)->max === 0) {
+                continue;
+            }
+
             $cols->push(ResultHelper::forCourse($course->id, $user)->percentageDone);
             $cols->push(ResultHelper::forCourse($course->id, $user)->total . ' / ' . ResultHelper::forCourse($course->id, $user)->max);
         }
