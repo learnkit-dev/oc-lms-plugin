@@ -43,6 +43,8 @@
         'code'                          => 'Code',
         'teams'                         => 'Teams',
         'team'                          => 'Team',
+        'exclude_from_export'           => 'Exclude from export',
+        'subtitle'                      => 'Subtitle',
     ],
     'tabs' => [
         'lms'                   => 'LMS',

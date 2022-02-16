@@ -142,7 +142,7 @@ class ResultHelper
         $done = 0;
 
         // Loop through all the pages
-        foreach ($course->pages as $page) {
+        foreach ($course->pages()->where('exclude_from_export', 0)->get() as $page) {
             // Loop through all the content blocks
             if (!$page->content_blocks) {
                 continue;

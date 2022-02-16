@@ -136,6 +136,10 @@ secondaryTabs:
             label: learnkit.lms::lang.fields.is_multiple
             type: switch
             default: true
+        exclude_from_export:
+            label: learnkit.lms::lang.fields.exclude_from_export
+            type: switch
+            default: false
         preview:
             type: partial
             path: $/learnkit/lms/controllers/pages/_preview.htm

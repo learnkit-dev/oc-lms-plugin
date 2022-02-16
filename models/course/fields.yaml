@@ -20,6 +20,10 @@ fields:
         preset:
             field: name
             mode: slug
+    subtitle:
+        label: learnkit.lms::lang.fields.subtitle
+        span: left
+        type: text
     description:
         label: learnkit.lms::lang.fields.description
         span: full

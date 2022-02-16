@@ -1,5 +1,7 @@
 <?php
 
+use LearnKit\LMS\Classes\Helper\ResultHelper;
+
 Route::get('/lms/report/{courseId}/{pageId}/{content_block_hash}', function ($courseId, $pageId, $contentBlockHash) {
     $course = \LearnKit\LMS\Models\Course::find($courseId);
     $page = \LearnKit\LMS\Models\Page::find($pageId);
@@ -115,3 +117,72 @@ Route::get('/h5p_override_styles.css', function () {
     return response(\Cms\Classes\Theme::getActiveTheme()->getCustomData()->custom_css)
         ->header('Content-Type', 'text/css');
 });
+
+Route::get('/export/{teamId}', function ($teamId) {
+    $team = Auth::getUser()->teams()->where('code', $teamId)->first();
+
+    if (!$team) {
+        return response('Geen toegang')->status(403);
+    }
+
+    $courses = $team->team_courses;
+
+    //
+    $rows = collect();
+
+    //
+    $rowHeaders = collect([
+        'Naam',
+        'E-mailadres',
+        'Groep',
+    ]);
+
+    // Add header items for each course
+    foreach ($courses as $course) {
+        $rowHeaders->push($course->name . ' gedaan');
+        $rowHeaders->push($course->name . ' score');
+    }
+
+    //
+    $rows->push($rowHeaders);
+
+    // Prepare the data
+    foreach ($team->users as $user) {
+        $cols = collect();
+
+        $department = $user->departments()->first();
+
+        $cols->push($user->name . ' ' . $user->surname);
+        $cols->push($user->email);
+
+        if ($department) {
+            $cols->push($department->name);
+        } else {
+            $cols->push('-');
+        }
+
+        // Add scores for each course
+        foreach ($courses as $course) {
+            $cols->push(ResultHelper::forCourse($course->id, $user)->percentageDone);
+            $cols->push(ResultHelper::forCourse($course->id, $user)->total . ' / ' . ResultHelper::forCourse($course->id, $user)->max);
+        }
+
+        //
+        $rows->push($cols);
+    }
+
+    $csv = \League\Csv\Writer::createFromFileObject(new SplTempFileObject);
+    $csv->setOutputBOM(\League\Csv\Writer::BOM_UTF8);
+
+    $csv->insertAll($rows->toArray());
+
+    //
+    $response = \Illuminate\Support\Facades\Response::make();
+    $response->header('Content-Type', 'text/csv');
+    $response->header('Content-Transfer-Encoding', 'binary');
+    $response->header('Content-Disposition', sprintf('%s; filename="%s"', 'attachment', 'privacybekwaam-export.csv'));
+    $response->setContent((string) $csv);
+
+    return $response;
+
+})->middleware('web');
