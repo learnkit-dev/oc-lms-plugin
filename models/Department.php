@@ -19,6 +19,8 @@ class Department extends Model
 
     protected $dates = ['deleted_at'];
 
+    public $jsonable = ['extra_data'];
+
 
     /**
      * @var string The database table used by the model.

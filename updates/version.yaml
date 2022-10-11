@@ -59,3 +59,6 @@
 1.0.20:
     - 'Updated table learnkit_lms_courses'
     - builder_table_update_learnkit_lms_courses_3.php
+1.0.21:
+    - 'Updated table learnkit_lms_departments'
+    - 'builder_table_update_learnkit_lms_departments_2.php'
