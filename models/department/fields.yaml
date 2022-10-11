@@ -3,7 +3,7 @@ fields:
         label: 'learnkit.lms::lang.fields.name'
         span: auto
         type: text
-    extra_data[kostenplaats]:
+    kostenplaats:
         label: 'Kostenplaats'
         type: number
         span: auto

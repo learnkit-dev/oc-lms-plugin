@@ -1,5 +1,5 @@
 columns:
-    extra_data[kostenplaats]:
+    kostenplaats:
         label: 'Kostenplaats'
     name:
         label: 'learnkit.lms::lang.fields.name'
