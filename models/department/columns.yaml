@@ -1,4 +1,6 @@
 columns:
+    extra_data[kostenplaats]:
+        label: 'Kostenplaats'
     name:
         label: 'learnkit.lms::lang.fields.name'
         type: text
@@ -11,5 +13,3 @@ columns:
         sortable: true
         select: name
         relation: team
-    extra_data[kostenplaats]:
-        label: 'Kostenplaats'
