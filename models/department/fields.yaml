@@ -7,6 +7,10 @@ fields:
         label: 'Kostenplaats'
         type: number
         span: auto
+    type:
+        label: 'Type'
+        type: text
+        span: auto
 tabs:
     fields:
         users:

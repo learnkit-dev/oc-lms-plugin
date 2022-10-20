@@ -13,3 +13,8 @@ columns:
         sortable: true
         select: name
         relation: team
+    type:
+        label: 'Type'
+        type: text
+        searchable: true
+        sortable: true
