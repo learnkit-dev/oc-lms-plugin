@@ -119,7 +119,10 @@ Route::get('/h5p_override_styles.css', function () {
 });
 
 Route::get('/export/{teamId}', function ($teamId) {
-    $team = Auth::getUser()->teams()->where('code', $teamId)->first();
+    $team = Auth::getUser()
+        ->teams()
+        ->where('code', $teamId)
+        ->first();
 
     if (!$team) {
         return response('Geen toegang')->status(403);
@@ -153,10 +156,12 @@ Route::get('/export/{teamId}', function ($teamId) {
     $rows->push($rowHeaders);
 
     // Prepare the data
-    foreach ($team->users as $user) {
+    $teamUsers = $team->users()->with('departments')->get();
+
+    foreach ($teamUsers as $user) {
         $cols = collect();
 
-        $department = $user->departments()->first();
+        $department = $user->departments->first();
 
         $cols->push($user->name . ' ' . $user->surname);
         $cols->push($user->email);
@@ -169,12 +174,14 @@ Route::get('/export/{teamId}', function ($teamId) {
 
         // Add scores for each course
         foreach ($courses as $course) {
-            if (ResultHelper::forCourse($course->id, $user)->max === 0) {
+            $result = ResultHelper::forCourse($course->id, $user);
+
+            if ($result->max === 0) {
                 continue;
             }
 
-            $cols->push(ResultHelper::forCourse($course->id, $user)->percentageDone);
-            $cols->push(ResultHelper::forCourse($course->id, $user)->total . ' / ' . ResultHelper::forCourse($course->id, $user)->max);
+            $cols->push($result->percentageDone);
+            $cols->push($result->total . ' / ' . $result->max);
         }
 
         //

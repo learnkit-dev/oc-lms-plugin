@@ -68,3 +68,5 @@
 1.0.23:
     - 'Updated table learnkit_lms_departments'
     - 'builder_table_update_learnkit_lms_departments_4.php'
+1.0.24:
+    - 'Improved export performance'
