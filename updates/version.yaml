@@ -70,3 +70,7 @@
     - 'builder_table_update_learnkit_lms_departments_4.php'
 1.0.24:
     - 'Improved export performance'
+1.0.25:
+    - 'Added some additional fields'
+    - 'builder_table_update_learnkit_lms_departments_5.php'
+    - 'update_users_table.php'

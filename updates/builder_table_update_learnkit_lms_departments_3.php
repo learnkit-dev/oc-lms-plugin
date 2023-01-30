@@ -3,7 +3,7 @@
 use Schema;
 use October\Rain\Database\Updates\Migration;
 
-class BuilderTableUpdateLearnkitLmsDepartments extends Migration
+class BuilderTableUpdateLearnkitLmsDepartments3 extends Migration
 {
     public function up()
     {

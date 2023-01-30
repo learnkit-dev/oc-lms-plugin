@@ -19,6 +19,28 @@ class User extends PluginExtender
         return new Users();
     }
 
+    public function addFields()
+    {
+        return [
+            'personal_id' => [
+                'label' => 'Personal ID',
+                'type' => 'text',
+                'span' => 'auto',
+            ],
+        ];
+    }
+
+    public function addColumns()
+    {
+        return [
+            'personal_id' => [
+                'label' => 'Personal ID',
+                'searchable' => true,
+                'sortable' => true,
+            ],
+        ];
+    }
+
     public function addTabFields()
     {
         return [

@@ -11,6 +11,10 @@ fields:
         label: 'Type'
         type: text
         span: auto
+    school:
+        label: 'School'
+        type: text
+        span: auto
 tabs:
     fields:
         users:

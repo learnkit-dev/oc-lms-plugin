@@ -6,6 +6,11 @@ columns:
         type: text
         searchable: true
         sortable: true
+    school:
+        label: 'School'
+        type: text
+        searchable: true
+        sortable: true
     team:
         label: 'learnkit.lms::lang.fields.team'
         type: text
