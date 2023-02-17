@@ -160,12 +160,20 @@ class Course extends Model
             $group = Department::find($groupId);
         }
 
+        $groupUsers = $group->users()
+            ->whereDoesntHave('groups', function ($query) {
+                return $query
+                    ->where('code', 'manager')
+                    ->orWhere('code', 'admin');
+            })
+            ->get();
+
         //
         $score = 0;
         $maxScore = 0;
         $percentageDone = 0;
 
-        foreach ($group->users as $user) {
+        foreach ($groupUsers as $user) {
             // Get score
             $uScore = ResultHelper::forCourse($this->id, $user);
 
@@ -175,9 +183,9 @@ class Course extends Model
         }
 
         return [
-            'score' => round($score / count($group->users), 2),
-            'max' => round($maxScore / count($group->users), 2),
-            'percentageDone' => round($percentageDone / count($group->users), 1),
+            'score' => round($score / count($groupUsers), 2),
+            'max' => round($maxScore / count($groupUsers), 2),
+            'percentageDone' => round($percentageDone / count($groupUsers), 1),
         ];
     }
 
