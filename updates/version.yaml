@@ -74,3 +74,6 @@
     - 'Added some additional fields'
     - 'builder_table_update_learnkit_lms_departments_5.php'
     - 'update_users_table.php'
+1.0.26:
+    - 'Added the department ID for managers'
+    - 'update_users_table_1.php'

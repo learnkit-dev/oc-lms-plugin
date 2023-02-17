@@ -27,6 +27,44 @@ class User extends PluginExtender
                 'type' => 'text',
                 'span' => 'auto',
             ],
+            'manager_department' => [
+                'label' => 'Manager department',
+                'type' => 'recordfinder',
+                'relation' => 'manager_department',
+                'list' => [
+                    'columns' => [
+                        'name' => [
+                            'type' => 'text',
+                            'searchable' => true,
+                            'sortable' => true,
+                        ],
+                        'school' => [
+                            'type' => 'text',
+                            'searchable' => true,
+                            'sortable' => true,
+                        ],
+                        'team' => [
+                            'label' => 'learnkit.lms::lang.fields.team',
+                            'type' => 'text',
+                            'searchable' => true,
+                            'sortable' => true,
+                            'select' => 'name',
+                            'relation' => 'team',
+                        ],
+                        'type' => [
+                            'label' => 'Type',
+                            'type' => 'text',
+                            'searchable' => true,
+                            'sortable' => true,
+                        ],
+                    ],
+                ],
+                'nameFrom' => 'name',
+                'span' => 'auto',
+                'emptyOption' => 'Selecteer een department',
+                'comment' => 'Vul alleen in op moment dat de gebruiker manager / admin rol heeft',
+                'options' => Department::query()->pluck('name', 'id'),
+            ],
         ];
     }
 
@@ -77,6 +115,7 @@ class User extends PluginExtender
             'departments' => [
                 'label' => 'group',
                 'manage'    => [
+                    'showSearch' => true,
                     'form' => '$/learnkit/lms/models/department/fields.yaml',
                 ],
                 'view'      => [
@@ -98,6 +137,15 @@ class User extends PluginExtender
             'departments' => [
                 Department::class,
                 'table' => 'learnkit_lms_departments_users',
+            ],
+        ];
+    }
+
+    public function belongsTo()
+    {
+        return [
+            'manager_department' => [
+                Department::class,
             ],
         ];
     }
