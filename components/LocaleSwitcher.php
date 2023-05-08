@@ -25,7 +25,13 @@ class LocaleSwitcher extends ComponentBase
 
     public function onRun()
     {
-        $this->page['activeLocale'] = auth()->user()->locale;
+        $locale = null;
+
+        if (! auth()->check()) {
+            $locale = 'nl';
+        }
+
+        $this->page['activeLocale'] = $locale ? $locale : auth()->user()->locale;
         $this->page['locales'] = Locale::pluck('name', 'code')->toArray();
     }
 
