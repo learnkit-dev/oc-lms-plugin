@@ -5,6 +5,7 @@ use Backend;
 use LearnKit\LMS\Classes\Extend\Codecycler\Teams;
 use LearnKit\LMS\Classes\Extend\LearnKit\Course;
 use LearnKit\LMS\Classes\Extend\LearnKit\Page;
+use LearnKit\LMS\Components\LocaleSwitcher;
 use System\Classes\PluginBase;
 use LearnKit\LMS\ContentBlocks\H5P;
 use LearnKit\LMS\ContentBlocks\Text;
@@ -82,6 +83,7 @@ class Plugin extends PluginBase
         return [
             'LearnKit\LMS\Components\Course'    => 'lmsCourse',
             'LearnKit\LMS\Components\Page'      => 'lmsPage',
+            LocaleSwitcher::class               => 'lmsLocaleSwitcher',
         ];
     }
 

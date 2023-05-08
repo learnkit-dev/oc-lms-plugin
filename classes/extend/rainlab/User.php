@@ -62,7 +62,7 @@ class User extends PluginExtender
                 'nameFrom' => 'name',
                 'span' => 'auto',
                 'emptyOption' => 'Selecteer een department',
-                'comment' => 'Vul alleen in op moment dat de gebruiker manager / admin rol heeft',
+                'comment' => 'Vul alleen voor manager/admin',
                 'options' => Department::query()->pluck('name', 'id'),
             ],
         ];
