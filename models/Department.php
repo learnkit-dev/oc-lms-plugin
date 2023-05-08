@@ -10,7 +10,7 @@ use Ramsey\Uuid\Uuid;
 class Department extends Model
 {
     use \October\Rain\Database\Traits\Validation;
-    
+
     use \October\Rain\Database\Traits\SoftDelete;
 
     public $implement = [
@@ -32,6 +32,8 @@ class Department extends Model
      */
     public $rules = [
     ];
+
+    protected $guarded = [];
 
     public $belongsToMany = [
         'users' => [
