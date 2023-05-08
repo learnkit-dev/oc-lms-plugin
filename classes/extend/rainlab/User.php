@@ -119,8 +119,8 @@ class User extends PluginExtender
                     'form' => '$/learnkit/lms/models/department/fields.yaml',
                 ],
                 'view'      => [
-                    'recordOnClick' => 'javascript:;',
                     'toolbarButtons' => 'link|unlink',
+                    'recordUrl' => 'learnkit/lms/departments/update/:id',
                     'list' => '$/learnkit/lms/models/department/columns.yaml',
                 ],
             ],

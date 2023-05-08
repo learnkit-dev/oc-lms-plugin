@@ -8,3 +8,4 @@ users:
     toolbarButtons: link|unlink
     showSearch: true
     list: $/rainlab/user/models/user/columns.yaml
+    recordUrl: rainlab/user/users/preview/:id

@@ -52,6 +52,7 @@ class Course extends PluginExtender
                 'view' => [
                     'toolbarButtons' => 'link|unlink',
                     'showSearch' => 'true',
+                    'recordUrl' => 'codecycler/teams/teams/update/:id',
                     'list' => '$/codecycler/teams/models/team/columns.yaml',
                 ],
             ],

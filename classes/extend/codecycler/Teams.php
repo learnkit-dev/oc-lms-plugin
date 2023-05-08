@@ -45,6 +45,7 @@ class Teams extends PluginExtender
                     'toolbarButtons' => 'link|unlink',
                     'showSearch' => true,
                     'list' => '$/learnkit/lms/models/course/columns.yaml',
+                    'recordUrl' => 'learnkit/lms/courses/update/:id',
                 ],
                 'manage' => [
                     'form' => '$/learnkit/lms/models/course/fields.yaml',
