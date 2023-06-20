@@ -11,6 +11,11 @@ columns:
         type: text
         searchable: true
         sortable: true
+    count_users:
+        label: 'Gebruikers'
+        type: number
+        relation: 'users'
+        relationCount: true
     team:
         label: 'learnkit.lms::lang.fields.team'
         type: text
