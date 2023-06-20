@@ -21,3 +21,8 @@ columns:
         sortable: true
         searchable: false
         type: switch
+    is_score_enabled:
+        label: 'In report'
+        sortable: true
+        searchable: false
+        type: switch

@@ -63,3 +63,7 @@ secondaryTabs:
             span: full
             type: text
             default: 'Afronden'
+        is_score_enabled:
+            label: 'In report'
+            type: switch
+            span: full

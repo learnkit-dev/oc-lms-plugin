@@ -46,7 +46,7 @@ class ResultHelper
                 $content = Content::find($block->content_id);
 
                 // Get the score for a block
-                $h5pResult = $user->results()->where('content_id', $block->content_id)->first();
+                $h5pResult = Result::where('user_id', $user->id)->where('content_id', $block->content_id)->first();
 
                 $result->max += $content->max_score;
 
@@ -98,7 +98,7 @@ class ResultHelper
             // Get the score for a block
             $content = Content::find($block->content_id);
 
-            $h5pResult = $user->results()->where('content_id', $block->content_id)->first();
+            $h5pResult = Result::where('user_id', $user->id)->where('content_id', $block->content_id)->first();
 
             //$h5pResult = Result::where('user_id', $user->id)->where('content_id', $block->content_id)->first();
 
@@ -159,7 +159,7 @@ class ResultHelper
                     $maxH5pItemsDone++;
 
                     // Get the score for a block
-                    $h5pResult = $user->results()->where('content_id', $block->content_id)->first();
+                    $h5pResult = Result::where('user_id', $user->id)->where('content_id', $block->content_id)->first();
 
                     if ($h5pResult) {
                         $done++;

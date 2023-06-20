@@ -181,9 +181,21 @@ class Course extends Model
             // Get score
             $uScore = ResultHelper::forCourse($this->id, $user);
 
+            if ($uScore->total == 0) {
+                continue;
+            }
+
             $score += $uScore->total;
             $maxScore += $uScore->max;
             $percentageDone += $uScore->percentageDone;
+        }
+
+        if (count($groupUsers) === 0) {
+            return [
+                'score' => 0,
+                'max' => 0,
+                'percentageDone' => 0,
+            ];
         }
 
         return [

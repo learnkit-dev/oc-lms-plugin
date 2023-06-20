@@ -80,3 +80,6 @@
 1.0.27:
     - 'Added locale to users table'
     - 'update_users_table_2.php'
+1.0.28:
+    - 'Added score enabled for courses'
+    - 'update_courses_table2.php'
