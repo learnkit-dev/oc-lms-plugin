@@ -19,10 +19,11 @@ class ResultHelper
      * @param $id
      * @return object
      */
-    public static function forPage($id, $user = null)
+    public static function forPage($page, $user = null)
     {
-        //
-        $page = Page::find($id);
+        if (! is_object($page)) {
+            $page = Page::find($page);
+        }
 
         //
         if (! $user) {
@@ -61,10 +62,12 @@ class ResultHelper
         return $result;
     }
 
-    public static function forBlock($pageId, $blockId, $user = null)
+    public static function forBlock($page, $block, $user = null)
     {
         //
-        $page = Page::find($pageId);
+        if (! is_object($page)) {
+            $page = Page::find($page);
+        }
 
         //
         if (! $user) {
@@ -78,16 +81,12 @@ class ResultHelper
             'status' => true,
         ];
 
-        if (!$page) {
+        if (! $page) {
             return $result;
         }
 
         //
-        $blocks = collect($page->content_blocks);
-        $block = $blocks->where('hash', $blockId)->first();
-
-        //
-        if (!$block) {
+        if (! $block) {
             return;
         }
 
@@ -99,7 +98,9 @@ class ResultHelper
             // Get the score for a block
             $content = Content::find($block->content_id);
 
-            $h5pResult = Result::where('user_id', $user->id)->where('content_id', $block->content_id)->first();
+            $h5pResult = $user->results()->where('content_id', $block->content_id)->first();
+
+            //$h5pResult = Result::where('user_id', $user->id)->where('content_id', $block->content_id)->first();
 
             $result->max += $content->max_score;
 
@@ -115,10 +116,11 @@ class ResultHelper
         return $result;
     }
 
-    public static function forCourse($id, $user = null)
+    public static function forCourse($course, $user = null)
     {
-        //
-        $course = Course::find($id);
+        if (! is_object($course)) {
+            $course = Course::find($course);
+        }
 
         //
         if (!$course) {
@@ -144,7 +146,7 @@ class ResultHelper
         // Loop through all the pages
         foreach ($course->pages()->where('exclude_from_export', 0)->get() as $page) {
             // Loop through all the content blocks
-            if (!$page->content_blocks) {
+            if (! $page->content_blocks) {
                 continue;
             }
 
