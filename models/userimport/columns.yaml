@@ -1,0 +1,16 @@
+columns:
+    name:
+        label: Voornaam
+        type: text
+    surname:
+        label: Achternaam
+        type: text
+    email:
+        label: E-mailadres
+        type: text
+    password:
+        label: Wachtwoord
+        type: text
+    department:
+        label: Department
+        type: text

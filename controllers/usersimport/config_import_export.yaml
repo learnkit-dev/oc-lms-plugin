@@ -1,0 +1,14 @@
+# ===================================
+#  Import/Export Behavior Config
+# ===================================
+
+import:
+    title: Import users
+    modelClass: LearnKit\LMS\Models\UserImport
+    list: $/learnkit/lms/models/userimport/columns.yaml
+    form:
+        fields:
+            team:
+                label: Team
+                type: dropdown
+                placeholder: Selecteer een team
