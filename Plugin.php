@@ -71,6 +71,15 @@ class Plugin extends PluginBase
         Event::listen('learnkit.h5p.extendStyles', function () {
             return ['/h5p_override_styles.css'];
         });
+
+        Event::listen('backend.menu.extendItems', function($manager) {
+            Backend\Classes\NavigationManager::instance()
+                ->addSideMenuItem('RainLab.User', 'user', 'import', [
+                    'label' => 'Import',
+                    'icon' => 'icon-download',
+                    'url' => Backend::url('learnkit/lms/usersimport/import'),
+                ]);
+        });
     }
 
     /**
