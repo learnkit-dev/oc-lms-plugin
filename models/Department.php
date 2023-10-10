@@ -40,6 +40,10 @@ class Department extends Model
             User::class,
             'table' => 'learnkit_lms_departments_users',
         ],
+        'managers' => [
+            User::class,
+            'table' => 'learnkit_lms_manager_departments_users',
+        ],
     ];
 
     public function beforeSave()

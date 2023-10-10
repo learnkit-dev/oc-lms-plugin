@@ -93,7 +93,14 @@ class User extends PluginExtender
                 'label' => '',
                 'type'  => 'partial',
                 'path'  => '$/learnkit/lms/partials/user_departments.htm',
-                'tab'   => 'learnkit.lms::lang.tabs.departments',
+                'tab'   => 'Medewerker groepen',
+                'span'  => 'full',
+            ],
+            'manager_departments' => [
+                'label' => '',
+                'type'  => 'partial',
+                'path'  => '$/learnkit/lms/partials/manager_departments.htm',
+                'tab'   => 'Manager groepen',
                 'span'  => 'full',
             ],
         ];
@@ -124,6 +131,18 @@ class User extends PluginExtender
                     'list' => '$/learnkit/lms/models/department/columns.yaml',
                 ],
             ],
+            'manager_departments' => [
+                'label' => 'manager group',
+                'manage'    => [
+                    'showSearch' => true,
+                    'form' => '$/learnkit/lms/models/department/fields.yaml',
+                ],
+                'view'      => [
+                    'toolbarButtons' => 'link|unlink',
+                    'recordUrl' => 'learnkit/lms/departments/update/:id',
+                    'list' => '$/learnkit/lms/models/department/columns.yaml',
+                ],
+            ],
         ];
     }
 
@@ -137,6 +156,10 @@ class User extends PluginExtender
             'departments' => [
                 Department::class,
                 'table' => 'learnkit_lms_departments_users',
+            ],
+            'manager_departments' => [
+                Department::class,
+                'table' => 'learnkit_lms_manager_departments_users',
             ],
         ];
     }

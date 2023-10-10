@@ -18,6 +18,8 @@ class UserImport extends ImportModel
             ->with('departments')
             ->find($this->team);
 
+        $newDepartments = [];
+
         foreach ($results as $row) {
             try {
 
@@ -48,7 +50,11 @@ class UserImport extends ImportModel
                 }
 
                 if (filled($row['department'])) {
-                    $department = $team->departments->where('name', $row['department'])->first();
+                    if (isset($newDepartments[$row['department']])) {
+                        $department = $newDepartments[$row['department']];
+                    } else {
+                        $department = $team->departments->where('name', $row['department'])->first();
+                    }
 
                     if (! $department) {
                         $department = new Department();
@@ -57,6 +63,8 @@ class UserImport extends ImportModel
                         $department->name = $row['department'];
 
                         $department->save();
+
+                        $newDepartments[$department->name] = $department;
                     }
 
                     if (! $department->users()->find($user->id)) {

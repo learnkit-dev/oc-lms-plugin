@@ -12,3 +12,4 @@ import:
                 label: Team
                 type: dropdown
                 placeholder: Selecteer een team
+                required: true

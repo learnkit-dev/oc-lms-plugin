@@ -161,15 +161,6 @@ class Course extends Model
         }
 
         $groupUsers = $group->users()
-            ->where(function ($query) use ($groupId) {
-                return $query
-                    ->whereDoesntHave('groups', function ($query) {
-                        return $query
-                            ->where('code', 'manager')
-                            ->orWhere('code', 'admin');
-                    })
-                    ->orWhere('manager_department_id', $groupId);
-            })
             ->get();
 
         //
