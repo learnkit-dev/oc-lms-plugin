@@ -21,4 +21,9 @@ tabs:
             type: partial
             path: field_users
             span: full
-            tab: Users
+            tab: Medewerkers
+        managers:
+            type: partial
+            path: field_managers
+            span: full
+            tab: Managers

@@ -1,5 +1,5 @@
 users:
-  label: Users
+  label: medewerker
   manage:
     showSearch: true
     form: $/rainlab/user/models/user/fields.yaml
@@ -9,3 +9,14 @@ users:
     showSearch: true
     list: $/rainlab/user/models/user/columns.yaml
     recordUrl: rainlab/user/users/preview/:id
+managers:
+    label: manager
+    manage:
+        showSearch: true
+        form: $/rainlab/user/models/user/fields.yaml
+        recordsPerPage: 50
+    view:
+        toolbarButtons: link|unlink
+        showSearch: true
+        list: $/rainlab/user/models/user/columns.yaml
+        recordUrl: rainlab/user/users/preview/:id
