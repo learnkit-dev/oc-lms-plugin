@@ -19,10 +19,10 @@ class UserImport extends ImportModel
             ->find($this->team);
 
         $newDepartments = [];
+        $newManagerDepartments = [];
 
         foreach ($results as $row) {
             try {
-
                 // Try to find the user
                 $user = User::findByEmail($row['email']);
 
@@ -72,9 +72,31 @@ class UserImport extends ImportModel
                     }
                 }
 
+                if (filled($row['manager_department'])) {
+                    if (isset($newManagerDepartments[$row['manager_department']])) {
+                        $department = $newManagerDepartments[$row['manager_department']];
+                    } else {
+                        $department = $team->departments->where('name', $row['manager_department'])->first();
+                    }
+
+                    if (! $department) {
+                        $department = new Department();
+
+                        $department->team_id = $team->id;
+                        $department->name = $row['manager_department'];
+
+                        $department->save();
+
+                        $newManagerDepartments[$department->name] = $department;
+                    }
+
+                    if (! $department->managers()->find($user->id)) {
+                        $department->managers()->attach($user);
+                    }
+                }
+
                 $this->logCreated();
             } catch (\Exception $ex) {
-                ray($ex);
                 $this->logError($row, $ex->getMessage());
             }
         }

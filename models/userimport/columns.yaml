@@ -12,5 +12,8 @@ columns:
         label: Wachtwoord
         type: text
     department:
-        label: Department
+        label: Medewerker groepen
+        type: text
+    manager_department:
+        label: Manager groepen
         type: text
