@@ -23,6 +23,8 @@ class UserImport extends ImportModel
 
         foreach ($results as $row) {
             try {
+                $creating = false;
+
                 // Try to find the user
                 $user = User::findByEmail($row['email']);
 
@@ -31,12 +33,14 @@ class UserImport extends ImportModel
 
                     $user->email = $row['email'];
                     $user->is_activated = true;
+
+                    $creating = true;
                 }
 
                 $user->name = $row['name'];
                 $user->surname = $row['surname'];
 
-                if (filled($row['password'])) {
+                if (filled($row['password']) && $creating) {
                     $password = bcrypt($row['password']);
 
                     $user->password = $password;
