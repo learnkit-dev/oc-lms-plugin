@@ -19,12 +19,6 @@ class DepartmentImport extends ImportModel
 
         foreach ($results as $row) {
             try {
-                $department = Department::firstWhere('name', $row['name']);
-
-                if (filled($department)) {
-                    throw new \Exception('Department with name ' . $row['name'] . ' already exists...');
-                }
-
                 $department = $team->departments()->create([
                     'name' => $row['name'] ?? '',
                     'kostenplaats' => $row['kostenplaats'] ?? '',
