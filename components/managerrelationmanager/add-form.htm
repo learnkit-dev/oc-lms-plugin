@@ -1,0 +1,12 @@
+<div x-cloak x-show="addFormOpen">
+    <form>
+        <input
+            class="flex-1 block w-full focus:ring-indigo-500 focus:border-indigo-500 min-w-0 rounded-md sm:text-sm border-gray-300 mb-2"
+            type="text"
+            name="search"
+            placeholder="Zoeken op naam, achternaam of e-mailadres"
+            data-track-input data-request="{{ __SELF__ }}::onSearchUser" />
+
+        <div id="manager-{{ __SELF__.property('relationName') }}-add-form-results"></div>
+    </form>
+</div>

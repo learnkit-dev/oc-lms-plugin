@@ -1,0 +1,15 @@
+{% for user in __SELF__.getItems() %}
+<tr class="bg-white">
+    <td class="px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900 privacy-blur">{{ user.name }}</td>
+    <td class="px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900 privacy-blur">{{ user.email }}</td>
+    <td class="px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900 privacy-blur">
+        <button
+            data-request="{{ __SELF__ }}::onDetach"
+            data-request-confirm="Weet je zeker dat je deze gebruiker wilt ontkoppelen?"
+            data-request-data="userId: {{ user.id }}"
+            class="rounded-full bg-red-500 hover:bg-red-600 w-6 h-6 text-white focus:outline-none">
+            <span class="text-sm block inset-0">-</span>
+        </button>
+    </td>
+</tr>
+{% endfor %}

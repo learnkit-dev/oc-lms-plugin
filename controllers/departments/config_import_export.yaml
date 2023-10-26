@@ -1,0 +1,15 @@
+# ===================================
+#  Import/Export Behavior Config
+# ===================================
+
+import:
+    title: Import departments
+    modelClass: LearnKit\LMS\Models\DepartmentImport
+    list: $/learnkit/lms/models/departmentimport/columns.yaml
+    form:
+        fields:
+            team:
+                label: Team
+                type: dropdown
+                placeholder: Selecteer een team
+                required: true

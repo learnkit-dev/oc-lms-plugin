@@ -1,11 +1,13 @@
 <?php namespace LearnKit\LMS;
 
+use Cms\Classes\Controller;
 use Event;
 use Backend;
 use LearnKit\LMS\Classes\Extend\Codecycler\Teams;
 use LearnKit\LMS\Classes\Extend\LearnKit\Course;
 use LearnKit\LMS\Classes\Extend\LearnKit\Page;
 use LearnKit\LMS\Components\LocaleSwitcher;
+use LearnKit\LMS\Components\ManagerRelationManager;
 use System\Classes\PluginBase;
 use LearnKit\LMS\ContentBlocks\H5P;
 use LearnKit\LMS\ContentBlocks\Text;
@@ -50,8 +52,6 @@ class Plugin extends PluginBase
 
     /**
      * Boot method, called right before the request route.
-     *
-     * @return array
      */
     public function boot()
     {
@@ -82,6 +82,14 @@ class Plugin extends PluginBase
         });
     }
 
+    public function register()
+    {
+        Event::listen('cms.page.beforeRenderPage', function (Controller $controller) {
+            $controller->addJs('https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js');
+            $controller->addCss('/plugins/learnkit/lms/assets/alpine.css');
+        });
+    }
+
     /**
      * Registers any front-end components implemented in this plugin.
      *
@@ -93,6 +101,7 @@ class Plugin extends PluginBase
             'LearnKit\LMS\Components\Course'    => 'lmsCourse',
             'LearnKit\LMS\Components\Page'      => 'lmsPage',
             LocaleSwitcher::class               => 'lmsLocaleSwitcher',
+            ManagerRelationManager::class       => 'lmsManagerRelationManager',
         ];
     }
 

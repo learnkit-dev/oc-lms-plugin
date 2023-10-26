@@ -53,7 +53,7 @@ class UserImport extends ImportModel
                     $team->users()->attach($user);
                 }
 
-                if (filled($row['department'])) {
+                if (isset($row['department']) && filled($row['department'])) {
                     if (isset($newDepartments[$row['department']])) {
                         $department = $newDepartments[$row['department']];
                     } else {
@@ -76,7 +76,7 @@ class UserImport extends ImportModel
                     }
                 }
 
-                if (filled($row['manager_department'])) {
+                if (isset($row['manager_department']) && filled($row['manager_department'])) {
                     if (isset($newManagerDepartments[$row['manager_department']])) {
                         $department = $newManagerDepartments[$row['manager_department']];
                     } else {
@@ -101,6 +101,7 @@ class UserImport extends ImportModel
 
                 $this->logCreated();
             } catch (\Exception $ex) {
+                ray($ex);
                 $this->logError($row, $ex->getMessage());
             }
         }

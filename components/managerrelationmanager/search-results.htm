@@ -1,0 +1,18 @@
+<ul class="py-3 gap-2 grid grid-cols-1">
+    {% for user in results %}
+        <li class="flex gap-3 items-center">
+            <button
+                data-request="{{ __SELF__ }}::onAttach"
+                data-request-confirm="Weet je zeker dat je deze gebruiker wilt koppelen?"
+                data-request-data="userId: {{ user.id }}"
+                class="rounded-full bg-indigo-500 hover:bg-indigo-600 w-6 h-6 text-white">
+                <span class="text-sm block inset-0">+</span>
+            </button>
+            <span>{{ user.email }}</span>
+        </li>
+    {% endfor %}
+
+    {% if results|length == 0 %}
+        <li>Geen resultaten...</li>
+    {% endif %}
+</ul>

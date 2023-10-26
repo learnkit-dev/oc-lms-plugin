@@ -1,0 +1,13 @@
+columns:
+    name:
+        label: Naam
+        type: text
+    kostenplaats:
+        label: Kostenplaats
+        type: text
+    type:
+        label: Type
+        type: text
+    school:
+        label: School
+        type: text

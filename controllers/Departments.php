@@ -1,5 +1,6 @@
 <?php namespace LearnKit\LMS\Controllers;
 
+use Backend\Behaviors\ImportExportController;
 use Backend\Behaviors\RelationController;
 use BackendMenu;
 use Backend\Classes\Controller;
@@ -13,6 +14,7 @@ class Departments extends Controller
         \Backend\Behaviors\FormController::class,
         \Backend\Behaviors\ListController::class,
         RelationController::class,
+        ImportExportController::class,
     ];
 
     /**
@@ -26,6 +28,8 @@ class Departments extends Controller
     public $listConfig = 'config_list.yaml';
 
     public $relationConfig = 'config_relations.yaml';
+
+    public $importExportConfig = 'config_import_export.yaml';
 
     /**
      * __construct the controller
