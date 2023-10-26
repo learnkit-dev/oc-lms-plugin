@@ -110,6 +110,12 @@ class ManagerRelationManager extends ComponentBase
 
         $this->prepareVars();
 
+        if ($this->property('relationName') == 'managers') {
+            $group = \RainLab\User\Models\UserGroup::where('code', 'manager')->first();
+
+            $user->addGroup($group);
+        }
+
         return [
             '#manager-' . $this->property('relationName') . '-add-form' => $this->renderPartial('@add-form'),
             '#manager-' . $this->property('relationName') . '-records' => $this->renderPartial('@table-records'),
@@ -127,6 +133,12 @@ class ManagerRelationManager extends ComponentBase
         $department->$relationName()->detach($user);
 
         $this->prepareVars();
+
+        if ($this->property('relationName') == 'managers' && $user->manager_departments()->count() === 0) {
+            $group = \RainLab\User\Models\UserGroup::where('code', 'manager')->first();
+
+            $user->removeGroup($group);
+        }
 
         return [
             '#manager-' . $this->property('relationName') . '-records' => $this->renderPartial('@table-records'),

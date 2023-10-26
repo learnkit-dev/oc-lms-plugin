@@ -26,10 +26,10 @@ class DepartmentImport extends ImportModel
                 }
 
                 $department = $team->departments()->create([
-                    'name' => $row['name'],
-                    'kostenplaats' => $row['kostenplaats'],
-                    'type' => $row['type'],
-                    'school' => $row['school'],
+                    'name' => $row['name'] ?? '',
+                    'kostenplaats' => $row['kostenplaats'] ?? '',
+                    'type' => $row['type'] ?? '',
+                    'school' => $row['school'] ?? '',
                 ]);
 
                 $this->logCreated();
