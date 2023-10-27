@@ -17,3 +17,6 @@ columns:
     manager_department:
         label: Manager groepen
         type: text
+    manager_role:
+        label: Manager
+        type: text

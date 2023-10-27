@@ -21,7 +21,7 @@ class UserImport extends ImportModel
         $newDepartments = [];
         $newManagerDepartments = [];
 
-        foreach ($results as $row) {
+        foreach ($results as $key => $row) {
             try {
                 $creating = false;
 
@@ -99,10 +99,15 @@ class UserImport extends ImportModel
                     }
                 }
 
+                if (isset($row['manager_role']) && in_array($row['manager_role'], ['ja', 'yes', '1', 'x', 'v'])) {
+                    $group = \RainLab\User\Models\UserGroup::where('code', 'manager')->first();
+
+                    $user->addGroup($group);
+                }
+
                 $this->logCreated();
             } catch (\Exception $ex) {
-                ray($ex);
-                $this->logError($row, $ex->getMessage());
+                $this->logError($key, $ex->getMessage());
             }
         }
     }

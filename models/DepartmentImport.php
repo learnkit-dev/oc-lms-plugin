@@ -17,7 +17,7 @@ class DepartmentImport extends ImportModel
             ->with('departments')
             ->find($this->team);
 
-        foreach ($results as $row) {
+        foreach ($results as $key => $row) {
             try {
                 $department = $team->departments()->create([
                     'name' => $row['name'] ?? '',
@@ -28,8 +28,7 @@ class DepartmentImport extends ImportModel
 
                 $this->logCreated();
             } catch (\Exception $ex) {
-                ray($ex);
-                $this->logError($row, $ex->getMessage());
+                $this->logError($key, $ex->getMessage());
             }
         }
     }
