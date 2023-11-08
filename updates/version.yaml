@@ -89,3 +89,6 @@
 1.0.30:
     - 'Added college fields to departments'
     - 'update_departments_table.php'
+1.0.31:
+    - 'Changed attribute type of kostenplaats'
+    - 'update_departments_table1.php'
