@@ -86,3 +86,6 @@
 1.0.29:
     - 'Added manager departments users table'
     - 'builder_table_create_learnkit_lms_manager_departments_users.php'
+1.0.30:
+    - 'Added college fields to departments'
+    - 'update_departments_table.php'

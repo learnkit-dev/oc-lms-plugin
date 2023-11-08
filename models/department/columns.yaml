@@ -28,3 +28,13 @@ columns:
         type: text
         searchable: true
         sortable: true
+    college:
+        label: 'College'
+        type: text
+        searchable: true
+        sortable: true
+    college_code:
+        label: 'College code'
+        type: text
+        searchable: true
+        sortable: true

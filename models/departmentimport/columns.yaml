@@ -11,3 +11,9 @@ columns:
     school:
         label: School
         type: text
+    college:
+        label: College
+        type: text
+    college_code:
+        label: College code
+        type: text

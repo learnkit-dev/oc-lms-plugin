@@ -15,6 +15,14 @@ fields:
         label: 'School'
         type: text
         span: auto
+    college:
+        label: 'College'
+        type: text
+        span: left
+    college_code:
+        label: 'College code'
+        type: text
+        span: auto
 tabs:
     fields:
         users:

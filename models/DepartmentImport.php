@@ -24,6 +24,8 @@ class DepartmentImport extends ImportModel
                     'kostenplaats' => $row['kostenplaats'] ?? '',
                     'type' => $row['type'] ?? '',
                     'school' => $row['school'] ?? '',
+                    'college' => $row['college'] ?? '',
+                    'college_code' => $row['college_code'] ?? '',
                 ]);
 
                 $this->logCreated();
